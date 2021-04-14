@@ -1,0 +1,1591 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="网络分层的真实含义是什么？, Golang Rus Bill 数据结构和算法 网络 设计模式">
+    <meta name="baidu-site-verification" content="fmlEuI34ir">
+    <meta name="google-site-verification" content="yCy2azpds5XSuGZvis6OuA-XIGF5GuGpYRAaGfD6o48">
+    <meta name="360-site-verification" content="b7c11a830ef90fd1464ad6206bb7b6e7">
+    <meta name="description" content="1、想成为技术牛人？先搞定网络协议！1.1 为什么网络协议这么重要？你好，我是刘超，网易研究院云计算技术部的首席架构师。我主要负责两部分工作，对内支撑网易核心业务上云，对外帮助客户搞定容器化与微服务化架构。
+为什么网络协议这么重要呢？为什么">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>网络分层的真实含义是什么？ | bill的博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?ce84511d3df71640a9378a69f6293044";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    
+        <script>
+            (function(){
+                var bp = document.createElement('script');
+                var curProtocol = window.location.protocol.split(':')[0];
+                if (curProtocol === 'https') {
+                    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+                }
+                else {
+                    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                }
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(bp, s);
+            })();
+        </script>
+    
+
+    <script>
+        (function(){
+        var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+        document.write('<script src="' + src + '" id="sozz"><\/script>');
+        })();
+    </script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body>
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/medias/logo.png" class="circle logo-img" alt="LOGO">
+                        
+                            <span class="logo-span">
+                                bill的博客
+                            </span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/contact" class="waves-effect waves-light">
+            
+            <i class="fa fa-comments"></i>
+            
+            <span>留言板</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">bill的博客</div>
+        <div class="logo-desc">
+            
+            华东交通大学 | 区块链工程师 | golang rust
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        <li>
+            <a href="/contact" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-comments"></i>
+                
+                留言板
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/billbliu/hexo-matery-modified" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/billbliu/hexo-matery-modified" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+                
+    </nav>
+
+</header>
+    
+
+
+
+    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div class="brand">
+                        <div class="description center-align post-title">
+                            网络分层的真实含义是什么？
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/极客时间/" target="_blank">
+                                    <span class="chip bg-color">
+                                        极客时间
+                                    </span>
+                                </a>
+                                
+                                <a href="/tags/趣谈网络协议/" target="_blank">
+                                    <span class="chip bg-color">
+                                        趣谈网络协议
+                                    </span>
+                                </a>
+                                
+                        </div>
+                        
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/网络/" class="post-category" target="_blank">
+                                    网络
+                                </a>
+                                
+                        </div>
+                        
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>
+                    发布日期:&nbsp;&nbsp;
+                        2020-03-10
+                </div>
+
+                <div class="post-author info-break-policy">
+                    <i class="fa fa-user-o fa-fw"></i>
+                    作者:&nbsp;&nbsp;
+                        
+                                    bill
+                                        
+                </div>
+
+                
+                    
+                        <div class="info-break-policy">
+                            <i class="fa fa-file-word-o fa-fw"></i>
+                            文章字数:&nbsp;&nbsp;
+                                7.3k
+                        </div>
+                        
+
+                            
+                                <div class="info-break-policy">
+                                    <i class="fa fa-clock-o fa-fw"></i>
+                                    阅读时长:&nbsp;&nbsp;
+                                        25
+                                            分
+                                </div>
+                                
+                                    
+
+                                        
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1、想成为技术牛人？先搞定网络协议！"><a href="#1、想成为技术牛人？先搞定网络协议！" class="headerlink" title="1、想成为技术牛人？先搞定网络协议！"></a>1、想成为技术牛人？先搞定网络协议！</h2><h3 id="1-1-为什么网络协议这么重要？"><a href="#1-1-为什么网络协议这么重要？" class="headerlink" title="1.1 为什么网络协议这么重要？"></a>1.1 为什么网络协议这么重要？</h3><p>你好，我是刘超，网易研究院云计算技术部的首席架构师。我主要负责两部分工作，对内支撑网易核心业务上云，对外帮助客户搞定容器化与微服务化架构。</p>
+<p>为什么网络协议这么重要呢？为什么“计算机组成与系统结构”“数据结构与算法”“操作系统”“计算机网络”“编译原理”，会成为大学计算机的核心课程呢？至少看起来，这些内容没有“多少天搞定MFC、Structs”这样的内容更容易帮你找到工作。我毕业的时候，也感到很困惑。</p>
+<p>不过当时我抱着一个理想，也可能是大多数程序员的理想：我要做技术牛人，我要搞定大系统。</p>
+<p>工作 15 年，我在 EMC 做过类似 GFS 的分布式存储开发，做过基于 Lucene 的搜索引擎，做过Hadoop 的运维；在 HP 和华为做过 OpenStack 的开发、实施和解决方案；还创业倒腾过 Mesos 容器平台，后来在网易做 Kubernetes。</p>
+<p>随着见过的世面越来越多，我渐渐发现，无论是对于大规模系统的架构，还是对于程序员的个人职业生涯，<strong>网络和网络协议都是绕不过去的坎儿</strong>。</p>
+<p>集群规模一大，我们首先想到的就是网络互通的问题；应用吞吐量压不上去，我们首先想到的也是网络互通的问题。不客气地讲，很多情况下，只要搞定了网络，一个大型系统也就搞定了一半。所以，<strong>要成为技术牛人，搞定大系统，一定要过网络这一关，而网络协议在网络中占有举足轻重的地位</strong>。</p>
+<p>相信大部分人都思考过“技术变化太快，容易过时”的问题。毕竟，技术浪潮一浪接一浪，新技术层出不穷。从搜索引擎、大数据、云计算，到人工智能、区块链，简直就是“你方唱罢我登场”。这里面究竟有没有最本质的东西，使得你掌握了它，就能在新技术的滚滚浪潮中，保持快速学习的能力？</p>
+<p><strong>通过对大量开源技术的代码进行分析，我发现很多技术看起来轰轰烈烈，扒下外衣，本质的东西其实就是基础知识和核心概念。</strong>想要不被滚滚而来的新技术淘汰，就要掌握这些可以长久使用的知识，而网络协议就是值得你学习，而且是到 40 岁之后依然有价值的知识。</p>
+<p>但是，要想真正学习和掌握网络协议，也并非易事。下面这些场景，你是不是也感同身受呢？</p>
+<ul>
+<li>网络协议知识点太多，学完记不住。我们都学过计算机网络课程，学的时候感觉并不难。尤其这门课没有公式，更像是文科。学了一大堆，也背了一大堆，应付完考试之后，最终都“还给老师”了。</li>
+<li>看上去懂了，但是经不住问。没关系，网上有很多的文章嘛。于是，你会搜索很多文章去看。看的时候，你感觉别人说的很有道理，好像理解了，但是经不住问，一问就发现，你只是了解了大概的流程，很多细节还是不知道。所以说，从能看懂到能给别人讲明白，中间还有很长一段距离。</li>
+<li>知识学会了，实际应用依旧不会。细节都摸索得差不多了，但是当你自己去应用和调试的时候，发现还是没有思路。比如，当创建出来的虚拟机不能上网的时候，该怎么办呢？学过的东西，怎么还是不会用？</li>
+</ul>
+<p>我把这样的网络协议学习过程总结为：<strong>一看觉得懂，一问就打鼓，一用就糊涂</strong>。</p>
+<h3 id="1-2网络协议究竟该怎么学？"><a href="#1-2网络协议究竟该怎么学？" class="headerlink" title="1.2网络协议究竟该怎么学？"></a>1.2网络协议究竟该怎么学？</h3><p>基于这个问题，我决定从以下三个角度和你分享我所理解的网络协议。</p>
+<ul>
+<li>第一，我会从身边经常见到的事情出发，用故事来讲解各种网络协议，然后慢慢扩展到不熟悉的领域。例如，每个人都会查看 IP 地址，那我们就从这个命令开始，展开一些概念；很多人都在大学宿舍组过简单的网络来打游戏，我就从宿舍里最简单的网络概念开始讲；然后说到办公室，说到日常上网、购物、视频下载等过程涉及的协议；最后说到最陌生的数据中心。</li>
+<li>第二，我会用贴近场景的方式来讲解网络协议，将各个层次的关系串起来，而非孤立地讲解某个概念。常见的计算机网络课程往往会按照网络分层，一层一层地讲，却很少讲层与层之间的关系。例如，我们学习路由协议的时候，在真实场景中，这么多的算法和二层是什么关系呢？和四层又是什么关系呢？例如，在真实的网络通信中，我们访问一个网站，做一个支付，在 TCP 进行三次握手的时候，IP 层在干嘛？MAC 层又在干嘛？这些你是不是都清楚？</li>
+<li>第三，我会在讲解完各个层次的网络协议之后，着重剖析如何在当下热门领域使用这些协议，比如云计算、容器和微服务。</li>
+</ul>
+<p><strong>一方面你可以知道网络协议真实应用的地方，另一方面你也可以通过上手使用云计算、容器、微服务来进一步加深对于协议的理解。</strong></p>
+<p>千里之行，始于足下。不管何时，我相信，<strong>扎实的功底和过硬的技术，都会是你职业发展的助力器。</strong></p>
+<p>希望这个专栏，不仅可以帮你理清繁杂的网络协议概念，<strong>帮你构建一个精准的网络协议知识框架，帮你在热门领域应用这些底层知识，更重要的是给你一种学习知识的方法和态度：看似最枯燥、最基础的东西往往具有最长久的生命力。</strong></p>
+<h2 id="2、为什么要学习网络协议？"><a href="#2、为什么要学习网络协议？" class="headerlink" title="2、为什么要学习网络协议？"></a>2、为什么要学习网络协议？</h2><p>《圣经》中有一个通天塔的故事，大致是说，上帝为了阻止人类联合起来，就让人类说不同的语言。人类没法儿沟通，达不成“协议”，通天塔的计划就失败了。</p>
+<p>但是千年以后，有一种叫“程序猿”的物种，敲着一种这个群体通用的语言，连接着全世界所有的人，打造这互联网世界的通天塔。如今的世界，正是因为互联网，才连接在一起。</p>
+<p>当 “Hello World!” 从显示器打印出来的时候，还记得你激动的心情吗？</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorld</span> <span class="token punctuation">{</span> 
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">{</span> 
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果你是程序员，一定看得懂上面这一段文字。这是每一个程序员向计算机世界说“你好，世界”的方式。但是，你不一定知道，这段文字也是一种协议，是人类和计算机沟通的协议，只有通过这种协议，计算机才知道我们想让它做什么。</p>
+<h3 id="2-1-协议的三要素"><a href="#2-1-协议的三要素" class="headerlink" title="2.1 协议的三要素"></a>2.1 协议的三要素</h3><p>当然，这种协议还是更接近人类语言，机器不能直接读懂，需要进行翻译，翻译的工作交给了编译器，也就是我们常说的编译(compile)。这个过程比较复杂，其中的编译原理非常复杂。</p>
+<p><img src="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/image-20210406100556506.png" alt="image-20210406100556506"></p>
+<p>可以看得出，计算机语言作为程序员控制一台计算机工作的协议，具备了协议的三要素。</p>
+<ul>
+<li>语法：就是这一段内容要符合一定的规则和格式。例如，括号要成对，结束要使用分号等。</li>
+<li>语义：就是这一段内容要代表某种意义。例如数字减去数字是有意义的，数字减去文本一般来说就没有意义。</li>
+<li>顺序：就是先干啥后干啥。例如，可以先加上某个数值，然后再减去某个数值。</li>
+</ul>
+<p>会了计算机语言，你就能够教给一台计算机完成你的工作了。但是，<strong>要想打造互联网世界的通天塔，只教给一台机器做什么是不够的，你需要学会教给一大片机器做什么。这就需要网络协议。只有通过网络协议，才能使一大片机器互相协作、共同完成一件事。</strong></p>
+<h3 id="2-2-网络协议长啥样？"><a href="#2-2-网络协议长啥样？" class="headerlink" title="2.2 网络协议长啥样？"></a>2.2 网络协议长啥样？</h3><p>先拿一个简单的例子，让你尝尝鲜，然后再讲一个大事。</p>
+<p>当你想要买一个商品，常规的做法就是打开浏览器，输入购物网站的地址。浏览器就会给你显示一个缤纷多彩的页面。</p>
+<p>那你有没有深入思考过，浏览器是如何做到这件事情的？它之所以能够显示缤纷多彩的页面，是因为它收到了一段来自 HTTP 协议的“东西”。我拿网易考拉来举例，格式就像下面这样：</p>
+<pre class="line-numbers language-html"><code class="language-html">HTTP/1.1 200 OK
+Date: Tue, 27 Mar 2018 16:50:26 GMT
+Content-Type: text/html;charset=UTF-8
+Content-Language: zh-CN
+<span class="token doctype">&lt;!DOCTYPE html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>base</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://pages.kaola.com/<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span> 网易考拉 3 周年主会场 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这符合协议的三要素吗？我们来看一下。</p>
+<p>首先，符合语法，也就是说只有按照上面那个格式来，浏览器才认。例如，上来是状态，然后是首部，然后是内容。</p>
+<p>其次，符合语义，也就是要按照约定的意思来。例如，状态200表示网页成功返回。如果不成功就是404。</p>
+<p>最后，符合顺序，你一点浏览器就是发送一个HTTP请求，然后才有上面那一串HTTP返回的东西。</p>
+<p>浏览器显然按照协议商定好的做了，最后一个五彩缤纷的页面就出现在你面前了。</p>
+<h3 id="2-3-常用的网络协议有哪些？"><a href="#2-3-常用的网络协议有哪些？" class="headerlink" title="2.3 常用的网络协议有哪些？"></a>2.3 常用的网络协议有哪些？</h3><p>接下来揭秘我要说的大事情，“双十一”。这和我们要讲的网络协议有什么关系呢？</p>
+<p>在经济学领域，有个伦纳德·里德（Leonard E. Read）创作的《铅笔的故事》。这个故事通过一个铅笔的诞生过程，来讲述复杂的经济学理论。这里，我也用一个下单的过程，看看互联网世界的运行过程中，都使用了哪些网络协议。</p>
+<p>你先在浏览器里面输入 <a href="https://www.kaola.com" target="_blank" rel="noopener">https://www.kaola.com</a> ，这是一个URL。浏览器只知道名字是“<a href="http://www.kaola.com”，但是不知道具体的地点，所以不知道应该如何访问。" target="_blank" rel="noopener">www.kaola.com”，但是不知道具体的地点，所以不知道应该如何访问。</a></p>
+<p>于是，浏览器打开地址簿去查找，可以使用一般的地址簿协议DNS去查找，还可以使用另外一种更加精准的地址簿查找协议HTTPDNS。无论使用哪一种方法查找，最终都会得到这个地址：106.114.138.24。这个是IP地址，是互联网世界的“门牌号”。</p>
+<p>知道了目标地址，浏览器就开始打包它的请求。对于普通的浏览请求，往往会使用HTTP协议；但是对于购物的请求，往往需要进行加密传输，因而会使用HTTPS协议。无论是什么协议，里面都会写明“你要买什么和买多少”。 </p>
+<p>DNS、HTTP、HTTPS所在的层我们称为应用层。经过应用层封装后，浏览器会将应用层的包交给下一层去完成，通过socket编程来实现。</p>
+<p><img src="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/image-20210406110608230.png" alt="image-20210406110608230"></p>
+<p>下一层是传输层。传输层有两种协议。一种是无连接的协议UDP，一种是面向连接的协议TCP。对于支付来讲，往往使用TCP协议。所谓的面向连接就是TCP会保证这个包能够到达目的地。如果不能到达，就会重新发送直到到达。</p>
+<p>TCP协议里面会有两个端口。一个是浏览器监听的端口，一个是电商的服务器监听的端口。操作系统往往通过端口来判断，它得到的包应该给那个进程。</p>
+<p><img src="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/image-20210406111315201.png" alt="image-20210406111315201"></p>
+<p>传输层封装完毕后，浏览器会将包交给操作系统的网络层。网络层的协议是IP协议。在IP协议里面会有源IP地址(即浏览器所在机器的IP地址)和目标IP地址(即电商网站所在服务器的 IP 地址)。</p>
+<p><img src="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/image-20210406111802669.png" alt="image-20210406111802669"></p>
+<p>操作系统既然知道了目标 IP 地址，就开始想如何根据这个门牌号找到目标机器。操作系统往往会判断，这个目标 IP 地址是本地人，还是外地人。如果是本地人，从门牌号就能看出来，但是显然电商网站不在本地，而在遥远的地方。</p>
+<p>操作系统知道要离开本地去远方。虽然不知道远方在何处，但是可以这样类比一下：如果去国外要去海关，去外地就要去网关。而操作系统启动的时候，就会被DHCP协议配置IP地址以及默认的网关的IP地址192.168.1.1。</p>
+<p>操作系统如何将 IP 地址发给网关呢？在本地通信基本靠吼，于是操作系统大吼一声，谁是 192.168.1.1啊？网关会回答它，我就是，我的本地地址在村东头。这个本地地址就是MAC地址，而大吼的那一声是ARP协议。</p>
+<p><img src="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/image-20210406112444610.png" alt="image-20210406112444610"></p>
+<p>于是操作系统将 IP 包交给了下一层，也就是MAC 层。网卡再将包发出去。由于这个包里面是有 MAC地址的，因而它能够到达网关。网关收到包之后，会根据自己的知识，判断下一步应该怎么走。网关往往是一个路由器，到某个 IP 地址应该怎么走，这个叫作路由表。</p>
+<p>路由器有点像玄奘西行路过的一个个国家的一个个城关。每个城关都连着两个国家，每个国家相当于一个局域网，在每个国家内部，都可以使用本地的地址 MAC 进行通信。一旦跨越城关，就需要拿出 IP 头来，里面写着贫僧来自东土大唐（就是源 IP 地址），欲往西天拜佛求经（指的是目标 IP 地址）。路过宝地，借宿一晚，明日启行，请问接下来该怎么走啊？</p>
+<p><img src="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/image-20210406112722772.png" alt="image-20210406112722772"></p>
+<p>城关往往是知道这些“知识”的，因为城关和临近的城关也会经常沟通。到哪里应该怎么走，这种沟通的协议称为路由协议，常用的有OSPF和BGP。 </p>
+<p><img src="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/image-20210406112805428.png" alt="image-20210406112805428"></p>
+<p>城关与城关之间是一个国家，当网络包知道了下一步去哪个城关，还是要使用国家内部的MAC地址，通过下一个城关的MAC地址，找到下一个城关，然后再问下一步的路怎么走，一直到走出最后一个城关。最后一个城关知道这个网络包要去的地方。于是，对着这个国家吼一声，谁是目标 IP 啊？目标服务器就会回复一个 MAC 地址。网络包过关后，通过这个 MAC 地址就能找到目标服务器。</p>
+<p>目标服务器发现 MAC 地址对上了，取下 MAC 头来，发送给操作系统的网络层。发现 IP 也对上了，就取下 IP 头。IP 头里会写上一层封装的是 TCP 协议，然后将其交给传输层，即TCP 层。</p>
+<p>在这一层里，对于收到的每个包，都会有一个回复的包说明收到了。这个回复的包绝非这次下单请求的结果，例如购物是否成功，扣了多少钱等，而仅仅是 TCP 层的一个说明，即收到之后的回复。当然这个回复，会按照刚刚一样的方式走回去，报个平安。因为一旦出了国门，西行路上千难万险，如果在这个过程中，网络包走丢了，例如进了大沙漠，或者被强盗抢劫杀害怎么办呢？因而到了要报个平安。</p>
+<p>如果过一段时间还是没到，发送端的 TCP 层会重新发送这个包，还是上面的过程，直到有一天收到平安到达的回复。这个重试绝非你的浏览器重新将下单这个动作重新请求一次。对于浏览器来讲，就发送了一次下单请求，TCP 层不断自己闷头重试。除非 TCP 这一层出了问题，例如连接断了，才轮到浏览器的应用层重新发送下单请求。</p>
+<p>当网络包平安到达 TCP 层之后，TCP 头中有目标端口号，通过这个端口号，可以找到电商网站的进程正在监听这个端口号，假设一个 Tomcat，将这个包发给电商网站。 </p>
+<p><img src="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/image-20210406135031161.png" alt="image-20210406135031161"></p>
+<p>电商网站的进程得到 HTTP 请求的内容，知道了要买东西，买多少。往往一个电商网站最初接待请求的这个 Tomcat 只是个接待员，负责统筹处理这个请求，而不是所有的事情都自己做。例如，这个接待员要告诉专门管理订单的进程，登记要买某个商品，买多少，要告诉管理库存的进程，库存要减少多少，要告诉支付的进程，应该付多少钱，等等。</p>
+<p>如和告诉相关的进程呢？往往通过 RPC 调用，即远程过程调用的方式来实现。远程过程调用就是当告诉管理订单进程的时候，接待员不用关心中间的网络互连问题，会由 RPC 框架统一处理。RPC 框架有很多种，有基于 HTTP 协议放在 HTTP 的报文里面的，有直接封装在 TCP 报文里面的。</p>
+<p>当接待员发现相应的部门都处理完毕，就回复一个 HTTPS 的包，告知下单成功。这个 HTTPS 的包，会像来的时候一样，经过千难万险到达你的个人电脑，最终进入浏览器，显示支付成功。</p>
+<p>看到了吧，一个简简单单的下单过程，中间牵扯到这么多的协议。而管理一大片机器，更是一件特别有技术含量的事情。除此之外，像最近比较火的云计算、容器、微服务等技术，也都需要借助各种协议，来达成大规模机器之间的合作。</p>
+<p>我在这里列一下之后要讲的网络协议，之后我会按照从底层到上层的顺序来讲述。 </p>
+<p><img src="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/image-20210406135401619.png" alt="image-20210406135401619"></p>
+<p>上面的“双十一”故事只是为了给你一个大致的框架，这里面有些协议，我在故事里已经提到了，有些还没有提到。在这门课的最后一章，当所有的协议都讲过之后，我会再重新讲一遍这个故事，到时候你就能明白更多的细节。</p>
+<h2 id="3、思考问题？"><a href="#3、思考问题？" class="headerlink" title="3、思考问题？"></a>3、思考问题？</h2><p>1、当网络包到达一个城关的时候，可以通过路由表得到下一个城关的 IP 地址，直接通过 IP 地址找就可以了，为什么还要通过本地的 MAC 地址呢？</p>
+<p>答案：</p>
+<p>在网络包里，有源IP地址和目标IP地址、源MAC地址和目标MAC地址。从路由表中取得下一跳的IP地址后，应该把这个地址放在哪里呢？如果放在目标IP地址里面，到了城关，谁知道最终的目标在哪里呢？所有要用MAC地址。</p>
+<p>所谓的下一跳，看起来是IP地址，其实是要通过ARP协议得到MAC地址，将下一跳的MAC地址放在目标MAC地址里面。</p>
+<p>2、MAC地址可以修改吗？如果MAC地址是全球唯一的，那么是不是这些网卡厂商都要维护自己的MAC列表，从而保证和其他厂商绝对不重复，有分配MAC地址的机构吗？MAC地址唯一是不是指局域网内MAC地址唯一？</p>
+<p>答案：</p>
+<p>我查了一下，MAC（Media Access Control，介质访问控制）地址，也叫硬件地址，长度是 48 比特（6 字节），由 16 进制的数字组成，分为前 24 位和后 24 位。</p>
+<p>前 24 位叫作<strong>组织唯一标志符</strong>（Organizationally Unique Identifier，OUI），是由 IEEE 的注册管理机构给不同厂家分配的代码，用于区分不同的厂家。后 24 位是厂家自己分配的，称为<strong>扩展标识符</strong>。同一个厂家生产的网卡中 MAC 地址后 24 位是不同的。</p>
+<p>也就是说，MAC 本来设计为唯一性的，但是后来设备越来越多，而且还有虚拟化的设备和网卡，有很多工具可以修改，就很难保证不冲突了。但是至少应该保持一个局域网内是唯一的。</p>
+<p>MAC 的设计，使得即便不能保证绝对唯一，但是能保证一个局域网内出现冲突的概率很小。这样，一台机器启动的时候，就能够在没有 IP 地址的情况下，先用 MAC 地址进行通信，获得 IP 地址。</p>
+<p>好在 MAC 地址是工作在一个局域网中的，因而即便出现了冲突，网络工程师也能够在自己的范围内很快定位并解决这个问题。这就像我们生成 UUID 或者哈希值，大部分情况下是不会冲突的，但是如果碰巧出现冲突了，采取一定的机制解决冲突就好。</p>
+<p>3、TCP 重试有没有可能导致重复下单？</p>
+<p>答案：</p>
+<p>答案是不会的。这个在TCP那一节有详细的讲解。因为 TCP 层收到了重复包之后，TCP 层自己会进行去重，发给应用层、HTTP 层。还是一个唯一的下单请求，所以不会重复下单。</p>
+<p>那什么时候会导致重复下单呢？因为网络原因或者服务端错误，导致 TCP 连接断了，这样会重新发送应用层的请求，也即 HTTP 的请求会重新发送一遍。</p>
+<p>如果服务端设计的是无状态的，它记不住上一次已经发送了一次请求。如果处理不好，就会导致重复下单，这就需要服务端除了实现无状态，还需要根据传过来的订单号实现幂等，同一个订单只处理一次。</p>
+<p>还会有的现象是请求被黑客拦截，发送多次，这在 HTTPS 层可以有很多种机制，例如通过 Timestamp 和 Nonce 随机数联合起来，然后做一个不可逆的签名来保证。</p>
+<p>4、TCP 报平安的包是原路返回吗？</p>
+<p>答案：</p>
+<p>这里的比喻不够严谨，容易让读者产生误会，这里的原路返回的意思是原样返回，也就是返回也是这个过程，不一定是完全一样的路径。</p>
+<p>5、IP 地址和 MAC 地址的关系？</p>
+<p>答案：</p>
+<ol>
+<li>局域网内通过dhpc配置IP地址是动态分配的，假如我是192.168.1.100，如果我下线了，可能IP就分配给了另一台电脑。IP和设备并不总是对应的，这对通信就产生了问题。但是MAC地址不同，MAC地址和设备是一一对应且全球唯一的。所以局域网使用MAC地址通信没有问题。</li>
+<li>历史遗留问题：早期的以太网只有交换机，没有路由器，以太网内通过MAC地址通信，后来才有了互联网，为了兼容原本的模式，采用了IP+MAC地址通信的方式。为啥不推倒重来呢？看看IPv6的处境就知道了。所以是现有MAC地址后有的IP，IP的提出主要还是因为MAC地址本身的缺陷，这个问题换成有了MAC为何还要IP地址也是很有意思。</li>
+<li>第一：MAC地址本身的缺陷：因为MAC地址是硬件厂商写在网卡中的，MAC地址虽然唯一但是不能表明用户在整个互联网中的位置，除非维护一个超级大的MAC地址对应表，但是那样的话寻址效率肯定爆炸。但是IP地址解决了这个问题，因为IP地址是网络提供商给你的，所以你在哪里整个网络都是知道的。第二：安全问题：获取MAC地址是通过ARP协议来完成的，如果只用MAC地址通信，那么广播风暴是个难题。</li>
+<li>我觉得如果哪天每个人笃定一个IPv6地址，那么MAC地址+IPv4的模式是不是可以被替换了？</li>
+</ol>
+<p>芒果同学的理解非常准确，讲IP 和 MAC 的关系的时候说了这个问题。IP 是有远程定位功能的，MAC 是没有远程定位功能的，只能通过本地 ARP 的方式找到。</p>
+<p>我个人认为，即便有了 IPv6，也不会改变当前的网络分层模式，还是 IP 层解决远程定位问题，只不过改成 IPv6 了，到了本地，还是通过 MAC。</p>
+<p>6、如果最后一跳的时候，IP 改变了怎么办？我的理解是当到达了目标机器所在的网关时，网关会使用ARP协议发送广播来得到目标机器的MAC地址。但是如果在这之前目标机器的IP就已经改变了，那么会怎么处理？</p>
+<p>答案：</p>
+<p>对于 IP 层来讲，当包到达最后一跳的时候，原来的 IP 不存在了。比如网线拔掉了，或者服务器直接宕机了，则 ARP 就找不到了，所以这个包就会发送失败了。对于 IP 层的工作就结束了。</p>
+<p>但是 IP 层之上还有 TCP 层，TCP 会重试的，包还是会重新发送，但是如果服务器没有启动起来，超过一定的次数，最终放弃。</p>
+<p>如果服务器重启了，IP 还是原来的 IP 地址，这个时候 TCP 重新发送的一个包的时候，ARP 是能够得到这个地址的，因而会发到这台机器上来，但是机器上面没有启动服务端监听那个端口，于是会发送 ICMP 端口不可达。</p>
+<p>如果服务器重启了，服务端也重新启动了，也在监听那个端口了，这个时候 TCP 的服务端由于是新的，Sequence Number 根本对不上，说明不是原来的连接，会发送 RST。</p>
+<p>那有没有可能有特殊的场景 Sequence Number 也能对的上呢？按照 Sequence Number 的生成算法，是不可能的。</p>
+<p>但是有一个非常特殊的方式，就是虚拟机的热迁移，从一台物理机迁移到另外一台物理机，IP 不变，MAC 不变，内存也拷贝过去，Sequence Number 在内存里面也保持住了，在迁移的过程中会丢失一两个包，但是从 TCP 来看，最终还是能够连接成功的。</p>
+<p>7、TCP 层报平安，怎么确认浏览器收到呢？</p>
+<p>TCP 报平安，只能保证 TCP 层能够收到，不保证浏览器能够收到。但是可以想象，如果浏览器是你写的一个程序，你也是通过 socket 编程写的，你是通过 socket，建立一个 TCP 的连接，然后从这个连接里面读取数据，读取的数据就是 TCP 层确认收到的。</p>
+<p>这个读取的动作是本地系统调用，大部分情况下不会失败的。如果读取失败呢，当然本地会报错，你的 socket 读取函数会返回错误，如果你是浏览器程序的实现者，你有两种选择，一个是将错误报告给用户，另一个是重新发送一次请求，获取结果显示给用户。</p>
+<p>8、有的文章说ARP是网络层协议，这里介绍是数据链路层协议，所以ARP 协议属于哪一层？</p>
+<p>ARP 属于哪个层，一直是有争议的。比如《TCP/IP 详解》把它放在了二层和三层之间，但是既然是协议，只要大家都遵守相同的格式、流程就可以了，在实际应用的时候，不会有歧义的，唯一有歧义的是参加各种考试，让你做选择题，ARP 属于哪一层？平时工作中咱不用纠结这个。</p>
+
+            </div>
+            <hr />
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+        -o-transform: scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">
+                写作不易，客官能否打赏一杯奶茶？
+            </h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+                    
+
+                        <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+                            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《网络分层的真实含义是什么？》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                bill
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '查教程获取',
+        clientSecret: '查教程获取',
+        repo: 'billbliu.github.io',
+        owner: 'billbliu',
+        admin: "billbliu",
+        id: '2020/03/10/geek-time-interesting-talk-about-network-protocols-01/',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+            
+
+                
+
+                            
+
+                                        
+
+                                                    
+                                                        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments input[type=text],
+    #vcomments input[type=email],
+    #vcomments input[type=url],
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<!-- <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script> -->
+
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '查教程获取',
+        appKey: '查教程获取',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'false' === 'true',
+        avatar: 'wavatar',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '如果你没有GitHub账号，还可以在这里评论啦！'
+    });
+</script>
+
+                                                            
+
+                                                                
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/03/10/geek-time-data-structures-and-algorithms-all/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="数据结构和算法">
+                        
+                        <span class="card-title">数据结构和算法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            目录
+复杂度分析
+数组
+复杂度分析
+复杂度分析
+复杂度分析
+复杂度分析
+复杂度分析
+复杂度分析
+复杂度分析
+复杂度分析
+复杂度分析
+复杂度分析
+
+
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/数据结构和算法/" class="post-category" target="_blank">
+                                    数据结构和算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/文章目录/" target="_blank">
+                        <span class="chip bg-color">文章目录</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/08/geek-time-interesting-talk-about-network-protocols-all/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="趣谈网络协议目录">
+                        
+                        <span class="card-title">趣谈网络协议目录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            目录第一模块 通信协议综述
+网络分层的真实含义是什么？
+网络分层的真实含义是什么？
+如何查看ip地址？
+DHCP与PXE：IP是怎么来的，又是怎么没的？
+
+
+
+第二模块 底层网络知识详解：从二层到三层
+从物理层到MAC层：如何在宿舍里自己组
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/网络/" class="post-category" target="_blank">
+                                    网络
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/文章目录/" target="_blank">
+                        <span class="chip bg-color">文章目录</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    <script>
+        $('#articleContent').on('copy', function (e) {
+            // IE8 or earlier browser is 'undefined'
+            if (typeof window.getSelection === 'undefined') return;
+
+            var selection = window.getSelection();
+            // if the selection is short let's not annoy our users.
+            if (('' + selection).length < Number.parseInt('120')) {
+                return;
+            }
+
+            // create a div outside of the visible area and fill it with the selected text.
+            var bodyElement = document.getElementsByTagName('body')[0];
+            var newdiv = document.createElement('div');
+            newdiv.style.position = 'absolute';
+            newdiv.style.left = '-99999px';
+            bodyElement.appendChild(newdiv);
+            newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+            // we need a <pre> tag workaround.
+            // otherwise the text inside "pre" loses all the line breaks!
+            if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+                newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+            }
+
+            var url = document.location.href;
+            newdiv.innerHTML += '<br />'
+                + '来源: bill的博客<br />'
+                + '作者: bill<br />'
+                + '链接: <a href="' + url + '">' + url + '</a><br />'
+                + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+            selection.selectAllChildren(newdiv);
+            window.setTimeout(function () { bodyElement.removeChild(newdiv); }, 200);
+        });
+    </script>
+
+    <!--<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+    <script>
+        const btw = new BTWPlugin();
+        btw.init({
+            id: 'artDetail',
+            blogId: '20962-1585405055583-879',
+            name: '算法码上来',
+            qrcode: 'https://godweiyang.com/medias/gzh.jpg',
+            keyword: 'VIP',
+        });
+    </script>
+-->
+    
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy; Bill. 版权所有
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">
+                    92.5k
+                </span>
+                
+
+                    <br>
+                    <span id="sitetime"></span>
+
+                    
+                        
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+            
+    <a href="https://github.com/billbliu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:billliu201919@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=1321531943&site=qq&menu=yes" class="tooltipped" target="_blank" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+
+        </div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+    $(document).ready(function () {
+
+        // 50ms周期检测函数
+        var int = setInterval(fixCount, 50);
+        var pvcountOffset = 80000;
+        var uvcountOffset = 20000;
+
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int);
+            }
+        }
+    });
+</script>
+
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2021, 03, 01, 00, 00, 00); //北京时间2018-2-13 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+    }/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+    siteTime();
+</script>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <script type="text/javascript"> var OriginTitile = document.title, st; document.addEventListener("visibilitychange", function () { document.hidden ? (document.title = "Σ(っ °Д °;)っ喔哟，崩溃啦！", clearTimeout(st)) : (document.title = "φ(゜▽゜*)♪咦，又好了！", st = setTimeout(function () { document.title = OriginTitile }, 3e3)) })
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=查教程获取"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '查教程获取');
+</script>
+
+
+
+    
+    <script src="/libs/others/clicklove.js"></script>
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+
+</html>
