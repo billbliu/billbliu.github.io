@@ -358,77 +358,22 @@
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2020/03/12/geek-time-interesting-talk-about-network-protocols-03/" target="_blank">
+                    <a href="/2020/03/11/linux-disk-formatting-problem1/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="如何查看ip地址？">
+                            <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="ubuntu18.04磁盘格式化被占用">
                             
-                            <span class="card-title">如何查看ip地址？</span>
+                            <span class="card-title">ubuntu18.04磁盘格式化被占用</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                            上一节结尾给你留的一个思考题是，你知道怎么查看 IP 地址吗？
-当面试听到这个问题的时候，面试者常常会觉得走错了房间。我面试的是技术岗位啊，怎么问这么简单的问题？的确，即便没有专业学过计算机的人，只要倒腾过电脑，重装过系统，大多也会知道这个
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-12
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/网络/" class="post-category" target="_blank">
-                                    网络
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/极客时间/" target="_blank">
-                            <span class="chip bg-color">极客时间</span>
-                        </a>
-                        
-                        <a href="/tags/趣谈网络协议/" target="_blank">
-                            <span class="chip bg-color">趣谈网络协议</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2020/03/11/databases-tools-all/" target="_blank">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="数据库工具">
-                            
-                            <span class="card-title">数据库工具</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                            目录
-数据表结构导出md表格工具：mysql_markdown
-数据表结构导出md表格工具：mysql_markdown
-数据表结构导出md表格工具：mysql_markdown
-数据表结构导出md表格工具：mysql_markdown
-数
+                            问题说明新装的Linux系统，两块硬盘，一块作为系统磁盘，另一块作为数据磁盘，安装完系统后，由于该数据磁盘中包含之前残余的LVM信息，无法对数据磁盘无法进行操作。
+新系统启动后，通过fdisk -l查看磁盘信息如下
+Disk /dev/sd
                             
                         </div>
                         <div class="publish-info">
@@ -439,8 +384,8 @@
                                 
                                 <i class="fa fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/数据库/" class="post-category" target="_blank">
-                                    数据库
+                                <a href="/categories/linux/" class="post-category" target="_blank">
+                                    linux
                                 </a>
                                 
                                 
@@ -451,8 +396,8 @@
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/文章目录/" target="_blank">
-                            <span class="chip bg-color">文章目录</span>
+                        <a href="/tags/linux问题/" target="_blank">
+                            <span class="chip bg-color">linux问题</span>
                         </a>
                         
                     </div>
@@ -462,20 +407,22 @@
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2020/03/11/geek-time-data-structures-and-algorithms-01/" target="_blank">
+                    <a href="/2020/03/11/linux-disk-mount-problem1/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="复杂度分析">
+                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="linux磁盘挂载时报错“linux_raid_member”">
                             
-                            <span class="card-title">复杂度分析</span>
+                            <span class="card-title">linux磁盘挂载时报错“linux_raid_member”</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                            1、如何分析、统计算法的执行效率和资源消耗？我们都知道，数据结构和算法本身解决的是“快”和“省”的问题，即如何让代码运行得更快，如何让代码更省存储空间。所以，执行效率是算法一个非常重要的考量指标。那如何来衡量你编写的算法代码的执行效率呢？(
+                            重装了一台系统，分区格式化后挂载一个磁盘出错
+[root@CM-MM-sve-111 ~]# mount /dev/sdh1 /mnt
+mount: unknown filesystem type &#39;linux_raid_membe
                             
                         </div>
                         <div class="publish-info">
@@ -486,8 +433,8 @@
                                 
                                 <i class="fa fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/数据结构和算法/" class="post-category" target="_blank">
-                                    数据结构和算法
+                                <a href="/categories/linux/" class="post-category" target="_blank">
+                                    linux
                                 </a>
                                 
                                 
@@ -498,8 +445,8 @@
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/极客时间/" target="_blank">
-                            <span class="chip bg-color">极客时间</span>
+                        <a href="/tags/linux问题/" target="_blank">
+                            <span class="chip bg-color">linux问题</span>
                         </a>
                         
                     </div>
@@ -509,122 +456,28 @@
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2020/03/11/geek-time-interesting-talk-about-network-protocols-02/" target="_blank">
+                    <a href="/2020/03/11/linux-disk-raid0/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="网络分层的真实含义是什么？">
+                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="ubuntu18.04软RAID0方法">
                             
-                            <span class="card-title">网络分层的真实含义是什么？</span>
+                            <span class="card-title">ubuntu18.04软RAID0方法</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                            长时间从事计算机网络相关的工作，我发现，计算机网络有一个显著的特点，就是这是一个不仅需要背诵，而且特别需要将原理烂熟于胸的学科。很多问题看起来懂了，但是就怕往细里问，一问就发现你懂得没有那么透彻。
-我们上一节列了之后要讲的网络协议。这些协议
                             
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/网络/" class="post-category" target="_blank">
-                                    网络
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/极客时间/" target="_blank">
-                            <span class="chip bg-color">极客时间</span>
-                        </a>
-                        
-                        <a href="/tags/趣谈网络协议/" target="_blank">
-                            <span class="chip bg-color">趣谈网络协议</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2020/03/11/geek-time-data-structures-and-algorithms-02/" target="_blank">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="数组">
-                            
-                            <span class="card-title">数组</span>
-                        </div>
-                    </a>
+n代表硬盘总数 
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                            数组：为什么很多编程语言中数组都是从0开始编号？说到数组，我想每个人都不陌生，甚至还会自信的说，它很简单啊。
-是的，每一种编程语言基本都会有数组这种数据类型。不过，它不仅仅是一种编程语言中的数据类型，还是一种最基础的数据结构。尽管数组看起来
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/数据结构和算法/" class="post-category" target="_blank">
-                                    数据结构和算法
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+JBOD（Just a Bunch Of Disks）指将数个物理硬盘, 在操作系统中合并成⼀个逻辑硬盘, 以直接增加容量 
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/极客时间/" target="_blank">
-                            <span class="chip bg-color">极客时间</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2020/03/11/linux-cmd-disk-df/" target="_blank">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="linux磁盘命令df">
-                            
-                            <span class="card-title">linux磁盘命令df</span>
-                        </div>
-                    </a>
+依不同RAID⼚商实现算法对于性能表现会有不同, 性能公式仅供参考 
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                            sed -n 1p取结果的第一行
-root@ceph6:~# df -k |grep /dev/sda | sed -n 1p
-/dev/sda       15501613664 605347028 14114956276   5% /h
+RAID10、5
                             
                         </div>
                         <div class="publish-info">
@@ -658,60 +511,11 @@ root@ceph6:~# df -k |grep /dev/sda | sed -n 1p
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2020/03/11/linux-cmd-network-info/" target="_blank">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="linux网络命令">
-                            
-                            <span class="card-title">linux网络命令</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                            如何查看网口类型// 使用ethtool enp14s0f0,通过下面输出可以看到speed那一行，表示万兆网还是千兆网
-root@ceph2:~# ifconfig 
-enp14s0f0: flags=4163&lt;UP,BROADCA
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/linux/" class="post-category" target="_blank">
-                                    linux
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/network/" target="_blank">
-                            <span class="chip bg-color">network</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
                     <a href="/2020/03/11/mac-software/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="mac上必装的软件">
+                            <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="mac上必装的软件">
                             
                             <span class="card-title">mac上必装的软件</span>
                         </div>
@@ -726,8 +530,7 @@ Typora：md文档软件
 V2rayU：翻墙软件
 VSCode：编辑器
 Microsoft Remote Desktop：远程连接
-
-
+Royal TSX：堪比xshell的远程工具 Mac上类似于xshell的
                             
                         </div>
                         <div class="publish-info">
@@ -761,61 +564,11 @@ Microsoft Remote Desktop：远程连接
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2020/03/11/vscode-remote-ssh/" target="_blank">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="配置vscode 远程开发+ 免密登录">
-                            
-                            <span class="card-title">配置vscode 远程开发+ 免密登录</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                            1 vscode安装插件安装Remote - SSH插件
-2 把window的公钥配置到server端
-复制C:\Users\Administrator.ssh\id_rsa.pub里的内容
-server端在~/.ssh/目录创建autho
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/安装配置/" class="post-category" target="_blank">
-                                    安装配置
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/vscode/" target="_blank">
-                            <span class="chip bg-color">vscode</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
                     <a href="/2020/03/11/windows-software/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="windows上必装的软件">
+                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="windows上必装的软件">
                             
                             <span class="card-title">windows上必装的软件</span>
                         </div>
@@ -873,11 +626,61 @@ Xshell
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2020/03/11/vscode-remote-ssh/" target="_blank">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="配置vscode 远程开发+ 免密登录">
+                            
+                            <span class="card-title">配置vscode 远程开发+ 免密登录</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                            1 vscode安装插件安装Remote - SSH插件
+2 把window的公钥配置到server端
+复制C:\Users\Administrator.ssh\id_rsa.pub里的内容
+server端在~/.ssh/目录创建autho
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/安装配置/" class="post-category" target="_blank">
+                                    安装配置
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/vscode/" target="_blank">
+                            <span class="chip bg-color">vscode</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2020/03/11/leetcode-all/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="leetcode列表分类">
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="leetcode列表分类">
                             
                             <span class="card-title">leetcode列表分类</span>
                         </div>
@@ -934,6 +737,58 @@ Add Two Number
                             <span class="chip bg-color">文章目录</span>
                         </a>
                         
+                        <a href="/tags/leetcode/" target="_blank">
+                            <span class="chip bg-color">leetcode</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2020/03/10/geek-time-interesting-talk-about-network-protocols-01/" target="_blank">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="网络分层的真实含义是什么？">
+                            
+                            <span class="card-title">网络分层的真实含义是什么？</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                            1、想成为技术牛人？先搞定网络协议！1.1 为什么网络协议这么重要？你好，我是刘超，网易研究院云计算技术部的首席架构师。我主要负责两部分工作，对内支撑网易核心业务上云，对外帮助客户搞定容器化与微服务化架构。
+为什么网络协议这么重要呢？为什么
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-10
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/书籍专栏/" class="post-category" target="_blank">
+                                    书籍专栏
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/趣谈网络协议/" target="_blank">
+                            <span class="chip bg-color">趣谈网络协议</span>
+                        </a>
+                        
                     </div>
                     
                 </div>
@@ -945,7 +800,7 @@ Add Two Number
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="数据结构和算法">
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="数据结构和算法">
                             
                             <span class="card-title">数据结构和算法</span>
                         </div>
@@ -979,8 +834,8 @@ Add Two Number
                                 
                                 <i class="fa fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/数据结构和算法/" class="post-category" target="_blank">
-                                    数据结构和算法
+                                <a href="/categories/书籍专栏/" class="post-category" target="_blank">
+                                    书籍专栏
                                 </a>
                                 
                                 
@@ -993,6 +848,177 @@ Add Two Number
                         
                         <a href="/tags/文章目录/" target="_blank">
                             <span class="chip bg-color">文章目录</span>
+                        </a>
+                        
+                        <a href="/tags/数据结构与算法之美/" target="_blank">
+                            <span class="chip bg-color">数据结构与算法之美</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2020/03/08/geek-time-interesting-talk-about-network-protocols-all/" target="_blank">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="趣谈网络协议目录">
+                            
+                            <span class="card-title">趣谈网络协议目录</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                            目录第一模块 通信协议综述
+网络分层的真实含义是什么？
+网络分层的真实含义是什么？
+如何查看ip地址？
+DHCP与PXE：IP是怎么来的，又是怎么没的？
+
+
+
+第二模块 底层网络知识详解：从二层到三层
+从物理层到MAC层：如何在宿舍里自己组
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-08
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/书籍专栏/" class="post-category" target="_blank">
+                                    书籍专栏
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/文章目录/" target="_blank">
+                            <span class="chip bg-color">文章目录</span>
+                        </a>
+                        
+                        <a href="/tags/趣谈网络协议/" target="_blank">
+                            <span class="chip bg-color">趣谈网络协议</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/07/11/go-mod-use/" target="_blank">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="go module 实践">
+                            
+                            <span class="card-title">go module 实践</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                            
+Go Modules Reference - The Go Programming Language
+跳出 Go module 的泥潭 | 鸟窝
+
+什么是 go module
+go module
+
+go 的新依赖管理系统
+
+Go 1.11
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/golang/" class="post-category" target="_blank">
+                                    golang
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/gomod/" target="_blank">
+                            <span class="chip bg-color">gomod</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/07/11/go-mod-config/" target="_blank">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="go mod 小范围迁移方案">
+                            
+                            <span class="card-title">go mod 小范围迁移方案</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                            
+Gitlab 配置
+
+配置域名，确保 view-source:&lt;http://git.arsyun.com/hos/go-lib-websocket?go-get=1里出现正确的域名而不是IP&gt;
+HTTPS 建议配置但不是必须
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/golang/" class="post-category" target="_blank">
+                                    golang
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/gomod/" target="_blank">
+                            <span class="chip bg-color">gomod</span>
                         </a>
                         
                     </div>
@@ -1017,12 +1043,11 @@ Add Two Number
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">2 / 3</div>
+            <div class="center-align b-text-gray">2 / 2</div>
         </div>
         <div class="col s6 m4 l4">
             
-            <a href="/page/3/"
-               class="right btn-floating btn-large waves-effect waves-light bg-color">
+            <a class="right btn-floating btn-large disabled">
                 <i class="fa fa-angle-right"></i>
             </a>
             
@@ -1039,7 +1064,7 @@ Add Two Number
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
                 <span class="white-color">
-                    92.5k
+                    440.3k
                 </span>
                 
 

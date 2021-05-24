@@ -1,0 +1,2953 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="NewSql数据库TiDB, Golang Rus Bill 数据结构和算法 网络 设计模式">
+    <meta name="baidu-site-verification" content="fmlEuI34ir">
+    <meta name="google-site-verification" content="yCy2azpds5XSuGZvis6OuA-XIGF5GuGpYRAaGfD6o48">
+    <meta name="360-site-verification" content="b7c11a830ef90fd1464ad6206bb7b6e7">
+    <meta name="description" content="1、TiDB引入1.1. 数据库技术发展简史​        数据库技术产生于20世纪60年代末70年代初，其主要主要研究如何存储，使用和管理数据。随着计算机硬件和软件的发展，数据库技术也不断地发展。数据库技术在理论研究和系统开发上都取得了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>NewSql数据库TiDB | bill的博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?ce84511d3df71640a9378a69f6293044";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    
+        <script>
+            (function(){
+                var bp = document.createElement('script');
+                var curProtocol = window.location.protocol.split(':')[0];
+                if (curProtocol === 'https') {
+                    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+                }
+                else {
+                    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                }
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(bp, s);
+            })();
+        </script>
+    
+
+    <script>
+        (function(){
+        var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+        document.write('<script src="' + src + '" id="sozz"><\/script>');
+        })();
+    </script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body>
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/medias/logo.png" class="circle logo-img" alt="LOGO">
+                        
+                            <span class="logo-span">
+                                bill的博客
+                            </span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/contact" class="waves-effect waves-light">
+            
+            <i class="fa fa-comments"></i>
+            
+            <span>留言板</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">bill的博客</div>
+        <div class="logo-desc">
+            
+            华东交通大学 | 区块链工程师 | golang rust
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        <li>
+            <a href="/contact" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-comments"></i>
+                
+                留言板
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/billbliu/hexo-matery-modified" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/billbliu/hexo-matery-modified" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+                
+    </nav>
+
+</header>
+    
+
+
+
+    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div class="brand">
+                        <div class="description center-align post-title">
+                            NewSql数据库TiDB
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/TiDB/" target="_blank">
+                                    <span class="chip bg-color">
+                                        TiDB
+                                    </span>
+                                </a>
+                                
+                        </div>
+                        
+                </div>
+                <div class="col s5 right-align">
+                    
+                        <div class="post-cate">
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                                <a href="/categories/数据库/" class="post-category" target="_blank">
+                                    数据库
+                                </a>
+                                
+                        </div>
+                        
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>
+                    发布日期:&nbsp;&nbsp;
+                        2021-05-10
+                </div>
+
+                <div class="post-author info-break-policy">
+                    <i class="fa fa-user-o fa-fw"></i>
+                    作者:&nbsp;&nbsp;
+                        
+                                    bill
+                                        
+                </div>
+
+                
+                    
+                        <div class="info-break-policy">
+                            <i class="fa fa-file-word-o fa-fw"></i>
+                            文章字数:&nbsp;&nbsp;
+                                10.4k
+                        </div>
+                        
+
+                            
+                                <div class="info-break-policy">
+                                    <i class="fa fa-clock-o fa-fw"></i>
+                                    阅读时长:&nbsp;&nbsp;
+                                        41
+                                            分
+                                </div>
+                                
+                                    
+
+                                        
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1、TiDB引入"><a href="#1、TiDB引入" class="headerlink" title="1、TiDB引入"></a>1、TiDB引入</h2><h3 id="1-1-数据库技术发展简史"><a href="#1-1-数据库技术发展简史" class="headerlink" title="1.1. 数据库技术发展简史"></a>1.1. 数据库技术发展简史</h3><p>​        数据库技术产生于20世纪60年代末70年代初，其主要<strong>主要研究如何存储，使用和管理数据</strong>。随着计算机硬件和软件的发展，数据库技术也不断地发展。数据库技术在理论研究和系统开发上都取得了辉煌的成就。</p>
+<ul>
+<li><p>从<strong>数据管理的角度</strong>看，数据库技术到目前共经历了如下三个阶段：</p>
+<ol>
+<li>人工管理阶段-数据量小独立,用户直接管理</li>
+<li>文件系统阶段-使用文件存取数据,冗余度高,管理维护难</li>
+<li>数据库系统阶段-专门的数据库软件系统管理数据,高效方便,易于共享维护</li>
+</ol>
+</li>
+<li><p>按<strong>照数据模型发展的主线</strong>，数据库技术的形成过程和发展可分为如下三个阶段：</p>
+<ol>
+<li><p>层次和网状数据库管理系统-可以理解为使用指针来表示数据之间的联系</p>
+</li>
+<li><p>关系数据库管理系统(RDBMS)-可以理解为理解为使用二维表来表示维护数据间的关系</p>
+</li>
+<li><p>新一代数据库技术的研究和发展-针对关系型数据库存在数据模型，性能，扩展性，伸缩性等方面的缺点，出现了：</p>
+<p>ORDBMS:面向对象数据库技术。如：PostGreSQL</p>
+<p>NoSQL:非结构化数据库技术。如</p>
+<p> 1):键值存储数据库：Redis</p>
+<p> 2):列式储数数据库：HBase</p>
+<p> 3):文档型数据库：MongoDB</p>
+<p> 4):图形数据库：Neo4J</p>
+<p>NewSQL:这类数据库不仅具有NoSQL对海量数据的存储管理能力，还保持了传统数据库支持ACID和SQL等特性。如：TiDB</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="1-2-从MySQL到TiDB"><a href="#1-2-从MySQL到TiDB" class="headerlink" title="1.2. 从MySQL到TiDB"></a>1.2. 从MySQL到TiDB</h3><p><img src="/2021/05/10/tidb-databases-use/allsql.png" alt="img"></p>
+<p>​        如今的数据库种类繁多，RDBMS（关系型数据库）、NoSQL（Not Only SQL）、NewSQL，在数据库领域均有一席之地，可谓百家争鸣之势。那么我们为什么要学习使用TiDB呢？接下来就从我们最熟悉的MySQL的使用说起！</p>
+<h4 id="1-2-1-场景引入"><a href="#1-2-1-场景引入" class="headerlink" title="1.2.1. 场景引入"></a>1.2.1. 场景引入</h4><p>​        假设现在有一个高速发展的互联网公司,核心业务库MySQL的<strong>数据量已经近亿行,且还在不断增长中</strong>,公司对于数据资产较为重视,所有数据<strong>要求多副本保存至少5年</strong>,且除了有对历史数据<strong>进行统计分析的离线报表业务</strong>外,还有一些针<strong>对用户数据实时查询的需求</strong>,如用户历史订单实时查询。</p>
+<h4 id="1-2-2-问题分析"><a href="#1-2-2-问题分析" class="headerlink" title="1.2.2. 问题分析"></a>1.2.2. 问题分析</h4><p><strong>1、MySQL能否满足上述场景需求</strong></p>
+<p>​        根据以往的MySQL使用经验，MySQL单表在 5000 万行以内时，性能较好，单表超过5000万行后，数据库性能、可维护性都会极剧下降。当然这时候可以做MySQL分库分表,如使用Mycat或Sharding-jdbc</p>
+<p><strong>2、分库分表的能否解决问题</strong></p>
+<ul>
+<li><p>分库分表的优点非常明显，如：</p>
+<ol>
+<li>将大表拆分成小表，单表数据量控制在 5000 万行以内，使 MySQL 性能稳定可控。</li>
+<li>将单张大表拆分成小表后，能水平扩展，通过部署到多台服务器，提升整个集群的 QPS、TPS、Latency 等数据库服务指标。</li>
+</ol>
+</li>
+<li><p>但是，此方案的缺点也非常明显：</p>
+<ol>
+<li>分表跨实例后，产生分布式事务管理难题，一旦数据库服务器宕机，有事务不一致风险。</li>
+<li>分表后，对 SQL 语句有一定限制，对业务方功能需求大打折扣。尤其对于实时报表统计类需求，限制非常之大。事实上，报表大多都是提供给高层领导使用的，其重要性不言而喻。</li>
+<li>分表后，需要维护的对象呈指数增长（MySQL实例数、需要执行的 SQL 变更数量等）。</li>
+</ol>
+</li>
+</ul>
+<p><strong>3、能不能使用nosql数据库解决</strong></p>
+<p>​        我们是不是可以使用hbase、redis、mongdb等数据库解决？不行，因为nosql数据库能解决单表数据量的问题，但是它们对sql的支持不好，它们只方便于解决特定领域的问题有优势。</p>
+<h4 id="1-2-3-问题解决"><a href="#1-2-3-问题解决" class="headerlink" title="1.2.3. 问题解决"></a>1.2.3. 问题解决</h4><p>​        基于以上核心痛点，我们需要探索新的数据库技术方案来<strong>应对业务爆发式增长所带来的挑战，为业务提供更好的数据库服务支撑</strong>。</p>
+<p>调研市场上的各大数据库,我们可以考虑选用NewSQL技术来解决,因为NewSQL技术有如下显著特点:</p>
+<ul>
+<li>无限水平扩展能力（可以无限的加机器）</li>
+<li>分布式强一致性，确保数据 100% 安全</li>
+<li>完整的分布式事务处理能力与 传统数据库的ACID 特性</li>
+</ul>
+<p>而TiDB数据库 GitHub的活跃度及社区贡献者方面都可以算得上是国际化的开源项目,是NewSQL技术中的代表性产品,所以我们可以选择使用TiDB数据库!</p>
+<h4 id="1-2-4-总结"><a href="#1-2-4-总结" class="headerlink" title="1.2.4. 总结"></a>1.2.4. 总结</h4><p>​        传统关系型数据库历史比较久，目前RDBMS的代表为Oracle、MySQL、PostgreSQL，在数据库领域也是“辈份”比较高的，其广泛应用在各行各业，RDBMS大多为本地存储或共享存储。</p>
+<p>​        但是此类数据库存在着一些问题，如自身容量的限制。随着业务量不断增加，容量渐渐成为瓶颈，此时DBA(<em>数据库管理员Database Administrator</em>)会通过多次的分库分表(中间件sharding-JDBC)，以此来缓解容量问题。大量的分库分表，不仅耗费了大量人力，还使得业务访问数据库的路由逻辑变得复杂。除此之外，RDBMS伸缩性比较差，通常集群扩容缩容成本较高，且不满足分布式的事务。</p>
+<p>​        NoSQL类数据库的代表为Hbase、Redis、MongoDB、Cassandra等，这类数据库解决了 RDBMS伸缩性差的问题，集群容量扩容变得方便很多，但是由于存储方式为多个KV存储，所以对SQL的兼容性就大打折扣。对于NoSQL类数据库来说，只能满足部分分布式事务的特点。</p>
+<p>​        NewSQL领域的代表是Google的spanner和F1，其号称可以实现全球数据中心容灾，且完全满足分布式事务的ACID，但是只能在Google云上使用。</p>
+<p>​        TiDB诞生在大背景下，也弥补了国内在NewSQL领域中的空缺。TiDB自2015年5月写下第一行代码以来，至今已发布大小版本几十次，版本迭代十分迅速。</p>
+<h3 id="1-3-TiDB概述"><a href="#1-3-TiDB概述" class="headerlink" title="1.3. TiDB概述"></a>1.3. TiDB概述</h3><h4 id="1-3-1-官网"><a href="#1-3-1-官网" class="headerlink" title="1.3.1. 官网"></a>1.3.1. 官网</h4><p><a href="https://pingcap.com/index.html" target="_blank" rel="noopener">https://pingcap.com/index.html</a></p>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable</a></p>
+<p>TiDB：开源分布式关系型数据库，可以理解为是MySQL的加强版/分布式MySQL/MySQLPlus。</p>
+<p><img src="/2021/05/10/tidb-databases-use/20210111182804403.png" alt="img"></p>
+<h4 id="1-3-2-简介"><a href="#1-3-2-简介" class="headerlink" title="1.3.2. 简介"></a>1.3.2. 简介</h4><p>​        <a href="https://github.com/pingcap/tidb" target="_blank" rel="noopener">TiDB</a> 是 <a href="https://pingcap.com/about-cn/" target="_blank" rel="noopener">PingCAP</a> 公司自主设计、研发的开源分布式关系型数据库，是一款同时支持在线事务处理与在线分析处理 (Hybrid Transactional and Analytical Processing, HTAP）的融合型分布式数据库产品，具备水平扩容或者缩容、金融级高可用、实时 HTAP、云原生的分布式数据库、兼容 MySQL 5.7 协议和 MySQL 生态等重要特性。目标是为用户提供一站式 OLTP (Online Transactional Processing)、OLAP (Online Analytical Processing)、HTAP 解决方案。TiDB 适合高可用、强一致要求较高、数据规模较大等各种应用场景。</p>
+<p>​        TiDB数据库具备<strong>「分布式强一致性事务、在线弹性水平扩展、故障自恢复的高可用、跨数据中心多活」等核心特性，是大数据时代理想的数据库集群和云数据库解决方案</strong>。目前，已被近 1000 家不同行业的领先企业应用在实际生产环境，涉及互联网、游戏、银行、保险、证券、航空、制造业、电信、新零售、政府等多个行业，包括美国、欧洲、日本、东南亚等海外用户。</p>
+<p>​        <strong>TiDB 的设计目标是 100% 的 OLTP 场景和 80% 的 OLAP 场景，更复杂的 OLAP 分析可以通过 TiSpark 项目来完成。</strong></p>
+<p>​        TiDB 对业务没有任何侵入性，能优雅的替换传统的数据库中间件、数据库分库分表等 Sharding 方案。同时它也让开发运维人员不用关注数据库 Scale 的细节问题，专注于业务开发，极大的提升研发的生产力。</p>
+<h3 id="1-4-扩展阅读"><a href="#1-4-扩展阅读" class="headerlink" title="1.4. 扩展阅读"></a>1.4. 扩展阅读</h3><h4 id="1-4-1-数据管理技术发展阶段"><a href="#1-4-1-数据管理技术发展阶段" class="headerlink" title="1.4.1. 数据管理技术发展阶段"></a>1.4.1. 数据管理技术发展阶段</h4><ol>
+<li><p>人工管理阶段：20世纪50年代以前，计算机主要用于数值计算.从当时的硬件看，外存只有纸带，卡片，磁带，没有直接存取设备；从软件看（实际上，当时还未形成软件的整体概念），没有操作系统以及管理数据的软件；从数据看，数据量小，数据无结构，由用户直接管理，且数据间缺乏逻辑组织，数据依赖于特定的应用程序，缺乏独立性.</p>
+<p><img src="/2021/05/10/tidb-databases-use/20210111182804404.png" alt="img"></p>
+</li>
+<li><p>文件系统阶段：50年代后期到60年代中期，出现了磁鼓，磁盘等数据存储设备.新的数据处理系统迅速发展起来.这种数据处理系统是把计算机中的数据组织成相互独立的数据文件，系统可以按照文件的名称对其进行访问，对文件中的记录进行存取，并可以实现对文件的修改，插入和删除，这就是文件系统.文件系统实现了记录内的结构化,即给出了记录内各种数据间的关系.但是，文件从整体来看却是无结构的.其数据面向特定的应用程序，因此数据共享性差，且冗余度大，管理和维护的代价也很大.</p>
+<p><img src="/2021/05/10/tidb-databases-use/20210111182804406.png" alt="img"></p>
+</li>
+<li><p>数据库系统阶段：60年代后期，出现了数据库这样的数据管理技术.数据库的特点是数据不再只针对某一特定应用，而是面向全组织，具有整体的结构性，共享性高，冗余度小，具有一定的程序与数据间的独立性，并且实现了对数据进行统一的控制.</p>
+<p><img src="/2021/05/10/tidb-databases-use/20210111182804405.png" alt="img"></p>
+</li>
+</ol>
+<h4 id="1-4-2-数据库模型发展阶段"><a href="#1-4-2-数据库模型发展阶段" class="headerlink" title="1.4.2. 数据库模型发展阶段"></a>1.4.2. 数据库模型发展阶段</h4><ol>
+<li><p>第一代数据库系统 层次和网状数据库管理系统</p>
+<pre><code>    层次和网状数据库的代表产品是IBM公司在1969年研制出的层次模型数据库管理系统。层次数据库是数据库系统的先驱，而网状数据库则是数据库概念、方法、技术的奠基。</code></pre></li>
+<li><p>第二代数据库系统 关系数据库管理系统(RDBMS)</p>
+<p>​        1970年，IBM公司的研究员E.F.Codd在题为《大型共享数据库数据的关系模型》的论文中提出了数据库的关系模型，为关系数据库技术奠定了理论基础。到了80年代，几乎所有新开发的数据库系统都是关系型的。真正使得关系数据库技术实用化的关键人物是James Gray。Gray在解决如何保障数据的完整性、安全性、并发性以及数据库的故障恢复能力等重大技术问题方面发挥了关键作用。关系数据库系统的出现，促进了数据库的小型化和普及化，使得在微型机上配置数据库系统成为可能。</p>
+</li>
+<li><p>新一代数据库技术的研究和发展</p>
+<p>​        目前已从多方面发展了现行的数据库系统技术。我们可以从数据模型、新技术内容、应用领域三个方面概括新一代数据库系统的发展。</p>
+<p>(1) 面向对象的方法和技术对数据库发展的影响最为深远</p>
+<p>​        80年代，面向对象的方法和技术的出现，对计算机各个领域，包括程序设计语言、软件工程、信息系统设计以及计算机硬件设备等都产生了深远的影响，也给面临新挑战的数据库技术带来了新的机遇和希望。数据库研究人员借鉴和吸收了面向对象的方法和技术，提出了面向对象的数据库模型(简称对象模型)。当前有许多研究是建立在数据库已有的成果和技术上的，针对不同的应用，对传统的DBMS，主要是RDBMS进行不同层次上的扩充，例如建立对象关系(OR)模型和建立对象关系数据库(ORDB)。</p>
+<p>(2) 数据库技术与多学科技术的有机结合</p>
+<p>​        数据库技术与多学科技术的有机结合是当前数据库发展的重要特征。计算机领域中其他新兴技术的发展对数据库技术产生了重大影响。传统的数据库技术和其他计算机技术的结合、互相渗透，使数据库中新的技术内容层出不穷。数据库的许多概念、技术内容、应用领域，甚至某些原理都有了重大的发展和变化。建立和实现了一系列新型的数据库，如分布式数据库、并行数据库、演绎数据库、知识库、多媒体库、移动数据库等，它们共同构成了数据库大家族。</p>
+<p>(3) 面向专门应用领域的数据库技术的研究</p>
+<p>​        为了适应数据库应用多元化的要求，在传统数据库基础上，结合各个专门应用领域的特点，研究适合该应用领域的数据库技术，如工程数据库、统计数据库、科学数据库、空间数据库、地理数据库、Web数据库等，这是当前数据库技术发展的又一重要特征。同时，数据库系统结构也由主机/终端的集中式结构发展到网络环境的分布式结构，随后又发展成两层、三层或多层客户/服务器结构以及Internet环境下的浏览器/服务器和移动环境下的动态结构。多种数据库结构满足了不同应用的需求，适应了不同的应用环境。</p>
+</li>
+</ol>
+<h4 id="1-4-3-SQL，NoSQL，NewSQL"><a href="#1-4-3-SQL，NoSQL，NewSQL" class="headerlink" title="1.4.3. SQL，NoSQL，NewSQL"></a>1.4.3. SQL，NoSQL，NewSQL</h4><p><strong>1、关系型数据库(RDBMS,即SQL数据库)</strong></p>
+<p>商业软件： Oracle，DB2</p>
+<p>开源软件：MySQL，PostgreSQL</p>
+<p>单机版本已经很难满足海量数据的需求</p>
+<p><strong>2、NoSQL</strong></p>
+<p>​        NoSQL = Not Only SQL，意即“不仅仅是SQL，提倡运用非关系型的数据存储</p>
+<p>​        普遍选择牺牲掉复杂 SQL 的支持及 ACID 事务换取弹性扩展能力</p>
+<p>​        通常不保证强一致性的(支持最终一致)</p>
+<p>主要分类：</p>
+<ul>
+<li>键值（Key-Value）数据库：如 MemcacheDB，Redis</li>
+<li>文档存储：如 MongoDB</li>
+<li>列存储：方便存储结构化和半结构化数据，并做数据压缩，对某几列的查询有非常大的IO优势： 如 HBase，Cassandra</li>
+<li>图数据库：存储图关系(注意：不是图片)。如 Neo4J</li>
+</ul>
+<p><strong>3、NewSQL</strong></p>
+<p>​        针对OLTP的读写，提供与NOSQL相同的可扩展性和性能，同时能支持满足ACID特性的事务，即保持NoSQL的高可扩展和高性能，并且保持关系模型。</p>
+<ul>
+<li><p>为什么需要NewSQL？</p>
+<ul>
+<li>NoSQL 不能完全取代 RDBMS</li>
+<li>单机RDBMS 无法满足性能需求</li>
+<li>使用“单机RDBMS + 中间件”方式，在中间件层很难解决分布式事务、高可用问题</li>
+</ul>
+</li>
+<li><p>NewSQL设计架构</p>
+<ul>
+<li>可以基于全新的数据库平台，也可以基于现有的SQL引擎优化。</li>
+<li>无共享存储(MPP架构)是比较常见的架构</li>
+<li>基于多副本实现高可用和容灾</li>
+<li>分布式查询</li>
+<li>数据Sharding机制</li>
+<li>通过2PC，Paxos/Raft等协议实现数据一致</li>
+</ul>
+</li>
+<li><p>代表产品</p>
+<ul>
+<li>Google Spanner</li>
+<li>OceanBase</li>
+<li>TiDB</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-4-4-OLTP和OLAP"><a href="#1-4-4-OLTP和OLAP" class="headerlink" title="1.4.4. OLTP和OLAP"></a>1.4.4. OLTP和OLAP</h4><p><strong>OLTP</strong></p>
+<p>强调支持短时间内大量并发的事务操作（增删改查）能力，每个操作涉及的数据量都很小（比如几十到几百字节）</p>
+<p>强调事务的强一致性（想想银行转账交易，容不得差错）</p>
+<p>举例：“双十一”期间，可能有几十万用户在同一秒内下订单。后台数据库要能够并发的、以近乎实时的速度处理这些订单请求（如果下了订单，十几分钟还没有反应，用户肯定要骂人了）</p>
+<p><strong>OLAP</strong></p>
+<p>偏向于复杂的只读查询，读取海量数据进行分析计算，查询时间往往很长</p>
+<p>举例：“双十一”结束，淘宝的运营人员对订单进行分析挖掘，找出一些市场规律等等。 这种分析可能需要读取所有的历史订单进行计算，耗时几十秒甚至几十分钟都有可能。</p>
+<p>代表产品：</p>
+<p>​    Greenplum</p>
+<p>​    TeraData</p>
+<p>​    阿里 AnalyticDB</p>
+<h4 id="1-4-5-TiDB怎么诞生的"><a href="#1-4-5-TiDB怎么诞生的" class="headerlink" title="1.4.5. TiDB怎么诞生的?"></a>1.4.5. TiDB怎么诞生的?</h4><p>​        著名的开源分布式缓存服务 Codis 的作者，PingCAP联合创始人&amp; CTO ，资深 infrastructure 工程师的黄东旭，擅长分布式存储系统的设计与实现，开源狂热分子的技术大神级别人物。即使在互联网如此繁荣的今天，在数据库这片边界模糊且不确定地带，他还在努力寻找确定性的实践方向。</p>
+<p>​        2012 年底，他看到 Google 发布的两篇论文，如同棱镜般，折射出他自己内心微烁的光彩。这两篇论文描述了 Google 内部使用的一个海量关系型数据F1/Spanner，解决了关系型数据库、弹性扩展以及全球分布的问题，并在生产中大规模使用。“如果这个能实现，对数据存储领域来说将是颠覆性的”，黄东旭为完美方案的出现而兴奋， PingCAP 的 TiDB 在此基础上诞生了。</p>
+<h2 id="2、TiDB架构特性"><a href="#2、TiDB架构特性" class="headerlink" title="2、TiDB架构特性"></a>2、TiDB架构特性</h2><h3 id="2-1-TiDB-整体架构"><a href="#2-1-TiDB-整体架构" class="headerlink" title="2.1. TiDB 整体架构"></a>2.1. TiDB 整体架构</h3><p>​        TiDB 集群主要包括三个核心组件：<strong>TiDB Server，PD Server 和 TiKV Server</strong>。此外，还有用于解决用户复杂 OLAP 需求的 <strong>TiSpark 组件</strong>和简化云上部署管理的 <strong>TiDB Operator 组件</strong>。</p>
+<p>架构图解</p>
+<p><img src="/2021/05/10/tidb-databases-use/20210111182804398.png" alt="img"></p>
+<p><img src="/2021/05/10/tidb-databases-use/20210111182804399.png" alt="img"></p>
+<p><img src="/2021/05/10/tidb-databases-use/20210111182804400.png" alt="img"></p>
+<h4 id="2-1-1-TiDB-Server"><a href="#2-1-1-TiDB-Server" class="headerlink" title="2.1.1. TiDB Server"></a>2.1.1. TiDB Server</h4><p>​        TiDB Server 负责接收 SQL 请求，处理 SQL 相关的逻辑，并通过 PD 找到存储计算所需数据的 TiKV 地址，与 TiKV 交互获取数据，最终返回结果。TiDB Server 是无状态的，其本身并不存储数据，只负责计算，可以无限水平扩展，可以通过负载均衡组件（如LVS、HAProxy 或 F5）对外提供统一的接入地址。</p>
+<h4 id="2-1-2-PD-Server"><a href="#2-1-2-PD-Server" class="headerlink" title="2.1.2. PD Server"></a>2.1.2. PD Server</h4><p>​        Placement Driver (简称 PD) 是整个集群的管理模块，其主要工作有三个：一是存储集群的元信息（某个 Key 存储在哪个 TiKV 节点）；二是对 TiKV 集群进行调度和负载均衡（如数据的迁移、Raft group leader 的迁移等）；三是分配全局唯一且递增的事务 ID。</p>
+<p>​        PD 通过 Raft 协议保证数据的安全性。Raft 的 leader server 负责处理所有操作，其余的 PD server 仅用于保证高可用。建议部署奇数个 PD 节点。</p>
+<h4 id="2-1-3-TiKV-Server"><a href="#2-1-3-TiKV-Server" class="headerlink" title="2.1.3. TiKV Server"></a>2.1.3. TiKV Server</h4><p>​        TiKV Server 负责存储数据，从外部看 TiKV 是一个分布式的提供事务的 Key-Value 存储引擎。存储数据的基本单位是 Region，每个 Region 负责存储一个 Key Range（从 StartKey 到 EndKey 的左闭右开区间）的数据，每个 TiKV 节点会负责多个 Region。TiKV 使用 Raft 协议做复制，保持数据的一致性和容灾。副本以 Region 为单位进行管理，不同节点上的多个 Region 构成一个 Raft Group，互为副本。数据在多个 TiKV 之间的负载均衡由 PD 调度，这里也是以 Region 为单位进行调度。</p>
+<h4 id="2-1-4-TiSpark"><a href="#2-1-4-TiSpark" class="headerlink" title="2.1.4. TiSpark"></a>2.1.4. TiSpark</h4><p>​        TiSpark 作为 TiDB 中解决用户复杂 OLAP 需求的主要组件，将 Spark SQL 直接运行在 TiDB 存储层上，同时融合 TiKV 分布式集群的优势，并融入大数据社区生态。至此，TiDB 可以通过一套系统，同时支持 OLTP 与 OLAP，免除用户数据同步的烦恼。</p>
+<h4 id="2-1-5-TiDB-Operator"><a href="#2-1-5-TiDB-Operator" class="headerlink" title="2.1.5. TiDB Operator"></a>2.1.5. TiDB Operator</h4><p>​        TiDB Operator 提供在主流云基础设施（Kubernetes）上部署管理 TiDB 集群的能力。它结合云原生社区的容器编排最佳实践与 TiDB 的专业运维知识，集成一键部署、多集群混部、自动运维、故障自愈等能力，极大地降低了用户使用和管理 TiDB 的门槛与成本。</p>
+<h3 id="2-2-TiDB-核心特性"><a href="#2-2-TiDB-核心特性" class="headerlink" title="2.2. TiDB 核心特性"></a>2.2. TiDB 核心特性</h3><p>TiDB 具备如下众多特性,其中<strong>两大核心特性为：水平扩展与高可用</strong></p>
+<p><strong>1、高度兼容 MySQL</strong><br>        大多数情况下，无需修改代码即可从 MySQL 轻松迁移至 TiDB，分库分表后的 MySQL 集群亦可通过 TiDB 工具进行实时迁移。</p>
+<p>​        对于用户使用的时候，可以透明地从MySQL切换到TiDB 中，只是“新MySQL”的后端是存储“无限的”，不再受制于Local的磁盘容量。在运维使用时也可以将TiDB当做一个从库挂到MySQL主从架构中。</p>
+<p><strong>2、分布式事务</strong></p>
+<p>​        TiDB 100% 支持标准的 ACID 事务。</p>
+<p><strong>3、一站式 HTAP 解决方案</strong></p>
+<p>​        HTAP: 在线事务处理/在线分析处理(Hybrid Transactional/Analytical Processing)</p>
+<p>​        TiDB 作为典型的 OLTP 行存数据库，同时兼具强大的 OLAP 性能，配合 TiSpark，可提供一站式 HTAP 解决方案，一份存储同时处理 OLTP &amp; OLAP，无需传统繁琐的 ETL 过程。</p>
+<p><strong>4、云原生 SQL 数据库</strong></p>
+<p>​        TiDB 是为云而设计的数据库，支持公有云、私有云和混合云，配合 TiDB Operator 项目 可实现自动化运维，使部署、配置和维护变得十分简单。</p>
+<p><strong>5、水平弹性扩展</strong><br>        通过简单地增加新节点即可实现 TiDB 的水平扩展，按需扩展吞吐或存储，轻松应对高并发、海量数据场景。</p>
+<p><strong>6、真正金融级高可用</strong></p>
+<p>​        相比于传统主从 (M-S) 复制方案，基于 Raft 的多数派选举协议可以提供金融级的 100% 数据强一致性保证，且在不丢失大多数副本的前提下，可以实现故障的自动恢复 (auto-failover)，无需人工介入。</p>
+<h4 id="2-2-1-水平扩展"><a href="#2-2-1-水平扩展" class="headerlink" title="2.2.1. 水平扩展"></a>2.2.1. 水平扩展</h4><p>​        <strong>无限水平扩展是 TiDB 的一大特点，这里说的水平扩展包括两方面：计算能力(TiDB)和存储能力(TiKV)。</strong></p>
+<p>​        TiDB Server 负责处理 SQL 请求，随着业务的增长，可以简单的添加 TiDB Server 节点，提高整体的处理能力，提供更高的吞吐。</p>
+<p>​        TiKV 负责存储数据，随着数据量的增长，可以部署更多的 TiKV Server 节点解决数据 Scale 的问题。</p>
+<p>​        PD 会在 TiKV 节点之间以 Region 为单位做调度，将部分数据迁移到新加的节点上。</p>
+<p>​        所以在业务的早期，可以只部署少量的服务实例（推荐至少部署 3 个 TiKV， 3 个 PD，2 个 TiDB），随着业务量的增长，按照需求添加 TiKV 或者 TiDB 实例。</p>
+<h4 id="2-2-2-高可用"><a href="#2-2-2-高可用" class="headerlink" title="2.2.2. 高可用"></a>2.2.2. 高可用</h4><p><img src="/2021/05/10/tidb-databases-use/20210111182804401.png" alt="img"></p>
+<p>​        高可用是 TiDB 的另一大特点，TiDB/TiKV/PD 这三个组件都能容忍部分实例失效，不影响整个集群的可用性。下面分别说明这三个组件的可用性、单个实例失效后的后果以及如何恢复。</p>
+<p><strong>1、TiDB</strong></p>
+<p>​        TiDB 是无状态的，推荐至少部署两个实例，前端通过负载均衡组件对外提供服务。当单个实例失效时，会影响正在这个实例上进行的 Session，从应用的角度看，会出现单次请求失败的情况，重新连接后即可继续获得服务。单个实例失效后，可以重启这个实例或者部署一个新的实例。</p>
+<p><strong>2、PD</strong></p>
+<p>​        PD 是一个集群，通过 Raft 协议保持数据的一致性，单个实例失效时，如果这个实例不是 Raft 的 leader，那么服务完全不受影响；如果这个实例是 Raft 的 leader，会重新选出新的 Raft leader，自动恢复服务。PD 在选举的过程中无法对外提供服务，这个时间大约是3秒钟。推荐至少部署三个 PD 实例，单个实例失效后，重启这个实例或者添加新的实例。</p>
+<p><strong>3、TiKV</strong></p>
+<p>​        TiKV 是一个集群，通过 Raft 协议保持数据的一致性（副本数量可配置，默认保存三副本），并通过 PD 做负载均衡调度。单个节点失效时，会影响这个节点上存储的所有 Region。对于 Region 中的 Leader 节点，会中断服务，等待重新选举；对于 Region 中的 Follower 节点，不会影响服务。当某个 TiKV 节点失效，并且在一段时间内（默认 30 分钟）无法恢复，PD 会将其上的数据迁移到其他的 TiKV 节点上。</p>
+<h3 id="2-3-TiDB-存储和计算能力"><a href="#2-3-TiDB-存储和计算能力" class="headerlink" title="2.3. TiDB 存储和计算能力"></a>2.3. TiDB 存储和计算能力</h3><p><img src="/2021/05/10/tidb-databases-use/20210111182804402.png" alt="img"></p>
+<h4 id="2-3-1-存储能力-TiKV-LSM"><a href="#2-3-1-存储能力-TiKV-LSM" class="headerlink" title="2.3.1. 存储能力-TiKV-LSM"></a>2.3.1. 存储能力-TiKV-LSM</h4><p>​        TiKV Server通常是3+的，TiDB每份数据缺省为3副本，这一点与HDFS有些相似，但是通过Raft协议进行数据复制，TiKV Server上的数据的是以Region为单位进行，由PD Server集群进行统一调度，类似HBASE的Region调度。</p>
+<p>​        TiKV集群存储的数据格式是KV的，在TiDB中，并不是将数据直接存储在 HDD/SSD中，而是通过RocksDB实现了TB级别的本地化存储方案，着重提的一点是：RocksDB和HBASE一样，都是通过 <strong>LSM树</strong>作为存储方案，避免了B+树叶子节点膨胀带来的大量随机读写。从何提升了整体的吞吐量。</p>
+<h4 id="2-3-2-计算能力-TiDB-Server"><a href="#2-3-2-计算能力-TiDB-Server" class="headerlink" title="2.3.2. 计算能力-TiDB Server"></a>2.3.2. 计算能力-TiDB Server</h4><p>​        TiDB Server本身是无状态的，意味着当计算能力成为瓶颈的时候，可以直接扩容机器，对用户是透明的。理论上TiDB Server的数量并没有上限限制。</p>
+<h3 id="2-4-总结"><a href="#2-4-总结" class="headerlink" title="2.4. 总结"></a>2.4. 总结</h3><p>​        TiDB作为新一代的NewSQL数据库，在数据库领域已经逐渐站稳脚跟，结合了Etcd/MySQL/HDFS/HBase/Spark等技术的突出特点，随着TiDB的大面积推广，会逐渐弱化 OLTP/OLAP的界限，并简化目前冗杂的ETL流程，引起新一轮的技术浪潮。</p>
+<p>​        一言以蔽之，TiDB，前景可待，未来可期。</p>
+<h2 id="3、TiDB安装部署"><a href="#3、TiDB安装部署" class="headerlink" title="3、TiDB安装部署"></a>3、TiDB安装部署</h2><p>快速安装体验</p>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable/quick-start-with-tidb" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable/quick-start-with-tidb</a></p>
+<pre><code>CLUSTER START SUCCESSFULLY, Enjoy it ^-^
+To connect TiDB: mysql --host 10.3.6.62 --port 4001 -u root -p (no password)
+To connect TiDB: mysql --host 10.3.6.62 --port 4000 -u root -p (no password)
+To view the dashboard: http://10.3.6.62:2379/dashboard
+To view the Prometheus: http://10.3.6.62:9090
+To view the Grafana: http://10.3.6.62:3000</code></pre><p>补充：</p>
+<ul>
+<li>tiup playground v5.0.0 –db 2 –pd 3 –kv 3 –monitor –host 10.3.6.62  添加–host，局域网外部访问</li>
+<li>Grafana默认用户名admin，密码admin</li>
+<li>dashboard默认用户名为 root，密码为空</li>
+</ul>
+<h2 id="4、TiDB实践"><a href="#4、TiDB实践" class="headerlink" title="4、TiDB实践"></a>4、TiDB实践</h2><h3 id="4-1-TiDB-SQL操作"><a href="#4-1-TiDB-SQL操作" class="headerlink" title="4.1 TiDB-SQL操作"></a>4.1 TiDB-SQL操作</h3><p>操作文档：<a href="https://docs.pingcap.com/zh/tidb/stable/basic-sql-operations" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable/basic-sql-operations</a></p>
+<pre><code>To connect TiDB: mysql --host 10.3.6.62 --port 4001 -u root -p (no password)
+To connect TiDB: mysql --host 10.3.6.62 --port 4000 -u root -p (no password)</code></pre><p>TiDB与mysql兼容性对比：<a href="https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility</a></p>
+<p>  成功部署 TiDB 集群之后，便可以在 TiDB 中执行 SQL 语句了。因为 TiDB 兼容 MySQL，可以使用 MySQL 客户端连接 TiDB，并且大多数情况下可以直接执行 MySQL 语句。</p>
+<pre><code>mysql --host 10.3.6.62 --port 4000 -u root -p
+show databases;</code></pre><p><img src="/2021/05/10/tidb-databases-use/image-20210413163233173.png" alt="image-20210413163233173"></p>
+<h4 id="4-1-1-创建、查看和删除数据库"><a href="#4-1-1-创建、查看和删除数据库" class="headerlink" title="4.1.1 创建、查看和删除数据库"></a>4.1.1 创建、查看和删除数据库</h4><p>1、要创建一个名为 samp_db 的数据库，可使用以下语句。</p>
+<pre><code>CREATE DATABASE IF NOT EXISTS samp_db;</code></pre><p>2、使用 SHOW DATABASES 语句查看数据库。</p>
+<pre><code>SHOW DATABASES;</code></pre><p>3、使用 DROP DATABASE 语句删除数据库。</p>
+<pre><code>DROP DATABASE samp_db;</code></pre><p>4、再次查看数据库。</p>
+<pre><code>SHOW DATABASES;</code></pre><h4 id="4-1-2-创建、查看和删除表"><a href="#4-1-2-创建、查看和删除表" class="headerlink" title="4.1.2 创建、查看和删除表"></a>4.1.2 创建、查看和删除表</h4><p>1、先创建一个库。</p>
+<pre><code>CREATE DATABASE IF NOT EXISTS samp_db;
+USE samp_db;</code></pre><p>2、使用 SHOW TABLES 语句查看数据库中的所有表。</p>
+<pre><code>SHOW TABLES FROM samp_db;</code></pre><p>3、使用 CREATE TABLE 语句创建表。<br>如果表已存在，添加 IF NOT EXISTS 可防止发生错误。</p>
+<pre><code>CREATE TABLE IF NOT EXISTS person (
+      number INT(11),
+      name VARCHAR(255),
+      birthday DATE
+);</code></pre><p>4、使用 SHOW CREATE 语句查看建表语句。</p>
+<pre><code>SHOW CREATE table person;</code></pre><p>5、使用 SHOW FULL COLUMNS 语句查看表的列。</p>
+<pre><code>SHOW FULL COLUMNS FROM person;</code></pre><p>6、使用 DROP TABLE 语句删除表。</p>
+<pre><code>DROP TABLE person;
+或者
+DROP TABLE IF EXISTS person;</code></pre><h4 id="4-1-3-创建、查看和删除索引"><a href="#4-1-3-创建、查看和删除索引" class="headerlink" title="4.1.3 创建、查看和删除索引"></a>4.1.3 创建、查看和删除索引</h4><p>1、先创建一张表。</p>
+<pre><code>CREATE TABLE IF NOT EXISTS person (
+      number INT(11),
+      name VARCHAR(255),
+      birthday DATE
+);</code></pre><p>2、对于值不唯一的列，可使用 CREATE INDEX 或 ALTER TABLE 语句。</p>
+<pre><code>CREATE INDEX person_num ON person (number);
+或者
+ALTER TABLE person ADD INDEX person_num (number);
+
+CREATE UNIQUE INDEX person_num ON person(number); // 创建唯一索引</code></pre><p>3、使用 SHOW INDEX 语句查看表内所有索引。</p>
+<pre><code>SHOW INDEX from person;</code></pre><p>4、使用 ALTER TABLE 或 DROP INDEX 语句来删除索引。与 CREATE INDEX 语句类似，DROP INDEX 也可以嵌入 ALTER TABLE 语句。</p>
+<pre><code>DROP INDEX person_num ON person;
+ALTER TABLE person DROP INDEX person_num;</code></pre><p>5、对于值唯一的列，可以创建唯一索引。</p>
+<pre><code>CREATE UNIQUE INDEX person_num ON person (number);
+或者
+ALTER TABLE person ADD UNIQUE person_num (number);</code></pre><h4 id="4-1-4-增删改查数据"><a href="#4-1-4-增删改查数据" class="headerlink" title="4.1.4 增删改查数据"></a>4.1.4 增删改查数据</h4><p>1、使用 INSERT 语句向表内插入数据。</p>
+<pre><code>INSERT INTO person VALUES(&quot;1&quot;,&quot;tom&quot;,&quot;20170912&quot;);</code></pre><p>2、使用 SELECT 语句检索表内数据。</p>
+<pre><code>SELECT * FROM person;</code></pre><p>3、使用 UPDATE 语句修改表内数据。</p>
+<pre><code>UPDATE person SET birthday=&#39;20200202&#39; WHERE name=&#39;tom&#39;;
+SELECT * FROM person;</code></pre><p>4、使用 DELETE 语句删除表内数。</p>
+<pre><code>DELETE FROM person WHERE number=1;
+SELECT * FROM person;</code></pre><h4 id="4-1-5-创建、授权和删除用户"><a href="#4-1-5-创建、授权和删除用户" class="headerlink" title="4.1.5 创建、授权和删除用户"></a>4.1.5 创建、授权和删除用户</h4><p>1、使用 CREATE USER 语句创建一个用户 tiuser，密码为 123456。</p>
+<pre><code>CREATE USER &#39;tiuser&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;</code></pre><p>2、授权用户 tiuser 可检索数据库 samp_db 内的表。</p>
+<pre><code>GRANT SELECT ON samp_db.* TO &#39;tiuser&#39;@&#39;localhost&#39;;</code></pre><p>3、查询用户 tiuser 的权限。</p>
+<pre><code>SHOW GRANTS for tiuser@localhost;</code></pre><p>4、删除用户 tiuser。</p>
+<pre><code>DROP USER &#39;tiuser&#39;@&#39;localhost&#39;;</code></pre><p>5、查看所有权限。</p>
+<pre><code>SHOW GRANTS;</code></pre><h3 id="4-2-TiDB-读取历史数据"><a href="#4-2-TiDB-读取历史数据" class="headerlink" title="4.2 TiDB-读取历史数据"></a>4.2 TiDB-读取历史数据</h3><p>  接下来介绍 TiDB 如何读取历史版本数据，包括具体的操作流程以及历史数据的保存策略。</p>
+<h4 id="4-2-1-功能说明"><a href="#4-2-1-功能说明" class="headerlink" title="4.2.1 功能说明"></a>4.2.1 功能说明</h4><p>  TiDB 实现了通过标准 SQL 接口读取历史数据功能，无需特殊的 client 或者 driver。当数据被更新、删除后，依然可以通过 SQL 接口将更新/删除前的数据读取出来。</p>
+<p>  另外即使在更新数据之后，表结构发生了变化，TiDB 依旧能用旧的表结构将数据读取出来。</p>
+<h4 id="4-2-2-操作流程"><a href="#4-2-2-操作流程" class="headerlink" title="4.2.2 操作流程"></a>4.2.2 操作流程</h4><p>  为支持读取历史版本数据， 引入了一个新的 system variable: <strong>tidb_snapshot</strong> ，这个变量是 Session 范围有效，可以通过标准的 Set 语句修改其值。其值为文本，能够存储 TSO 和日期时间。TSO 即是全局授时的时间戳，是从 PD 端获取的; 日期时间的格式可以为： “2020-10-08 16:45:26.999”，一般来说可以只写到秒，比如”2020-10-08 16:45:26”。 当这个变量被设置时，TiDB 会用这个时间戳建立 Snapshot（没有开销，只是创建数据结构），随后所有的 Select 操作都会在这个 Snapshot 上读取数据。</p>
+<p>  注意：TiDB 的事务是通过 PD 进行全局授时，所以存储的数据版本也是以 PD 所授时间戳作为版本号。在生成 Snapshot 时，是以 tidb_snapshot 变量的值作为版本号，如果 TiDB Server 所在机器和 <strong>PD Server</strong> 所在机器的本地时间相差较大，需要<strong>以 PD 的时间为准</strong>。</p>
+<p>  当读取历史版本操作结束后，可以结束当前 Session 或者是通过 Set 语句将 tidb_snapshot 变量的值设为 “”，即可读取最新版本的数据。</p>
+<h4 id="4-2-3-历史数据保留策略"><a href="#4-2-3-历史数据保留策略" class="headerlink" title="4.2.3 历史数据保留策略"></a>4.2.3 历史数据保留策略</h4><p>  TiDB 使用 MVCC 管理版本，当更新/删除数据时，不会做真正的数据删除，只会添加一个新版本数据，所以可以保留历史数据。历史数据不会全部保留，超过一定时间的历史数据会被彻底删除，以减小空间占用以及避免历史版本过多引入的性能开销。</p>
+<p>  TiDB 使用周期性运行的 GC（Garbage Collection，垃圾回收）来进行清理，关于 GC 的详细介绍参见 TiDB 垃圾回收 (GC)。</p>
+<p>  这里需要重点关注的是 tikv_gc_life_time 和 tikv_gc_safe_point 这条。tikv_gc_life_time 用于配置历史版本保留时间，可以手动修改；tikv_gc_safe_point 记录了当前的 safePoint，用户可以安全地使用大于 safePoint 的时间戳创建 snapshot 读取历史版本。safePoint 在每次 GC 开始运行时自动更新。</p>
+<p>示例<br>1、初始化阶段，创建一个表，并插入几行数据。</p>
+<pre><code>create table t (c int);
+insert into t values (1), (2), (3);</code></pre><p>2、查看表中的数据。</p>
+<pre><code>select * from t;
++------+
+| c    |
++------+
+|    1 |
+|    2 |
+|    3 |
++------+</code></pre><p>3、查看当前时间。</p>
+<pre><code>select now();
++---------------------+
+| now()               |
++---------------------+
+| 2021-01-11 14:05:26 |
++---------------------+</code></pre><p>4、更新某一行数据。</p>
+<pre><code>update t set c=22 where c=2;</code></pre><p>5、确认数据已经被更新。</p>
+<pre><code>select * from t;
++------+
+| c    |
++------+
+|    1 |
+|   22 |
+|    3 |
++------+</code></pre><p>6、设置一个特殊的环境变量，这个是一个 session scope 的变量，其意义为读取这个时间之前的最新的一个版本。</p>
+<pre><code>set @@tidb_snapshot=&quot;2021-01-11 14:05:26&quot;;</code></pre><p>注意：这里的时间设置的是 update 语句之前的那个时间。<br>在 tidb_snapshot 前须使用 @@ 而非 @，因为 @@ 表示系统变量，@ 表示用户变量。<br> <br>7、这里读取到的内容即为 update 之前的内容，也就是历史版本。</p>
+<pre><code>select * from t;
++------+
+| c    |
++------+
+|    1 |
+|    2 |
+|    3 |
++------+</code></pre><p>8、清空这个变量后，即可读取最新版本数据。</p>
+<pre><code>set @@tidb_snapshot=&quot;&quot;;
+select * from t;
++------+
+| c    |
++------+
+|    1 |
+|   22 |
+|    3 |
++------+</code></pre><p>注意：在 tidb_snapshot 前须使用 @@ 而非 @，因为 @@ 表示系统变量，@ 表示用户变量。</p>
+<h3 id="4-3-数据迁移-TiDB-Lightning"><a href="#4-3-数据迁移-TiDB-Lightning" class="headerlink" title="4.3 数据迁移-TiDB Lightning"></a>4.3 数据迁移-TiDB Lightning</h3><p>原本使用的是MySQL数据库，现在随着数据量的变大，需要迁移到TiDB数据库，那么原本mysql的数据库如何迁移呢？</p>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable/migrate-from-aurora-using-lightning" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable/migrate-from-aurora-using-lightning</a></p>
+<h4 id="4-4-1-TiDB-Lightning介绍"><a href="#4-4-1-TiDB-Lightning介绍" class="headerlink" title="4.4.1 TiDB Lightning介绍"></a>4.4.1 TiDB Lightning介绍</h4><p>  TiDB Lightning 是一个将全量数据高速导入到 TiDB 集群的工具，目前支持 <strong>Mydumper 或 CSV 输出格式的数据源</strong>。你可以在以下两种场景下使用 Lightning：</p>
+<ul>
+<li>迅速导入大量新数据。</li>
+<li>备份恢复所有数据。</li>
+</ul>
+<p>TiDB Lightning 主要包含两个部分:</p>
+<ol>
+<li>tidb-lightning（“前端”）：主要完成适配工作，通过读取数据源，在下游 TiDB 集群建表、将数据转换成键/值对 (KV 对) 发送到 tikv-importer、检查数据完整性等。</li>
+<li>tikv-importer（“后端”）：主要完成将数据导入 TiKV 集群的工作，把 tidb-lightning 写入的 KV 对缓存、排序、切分并导入到 TiKV 集群。</li>
+</ol>
+<p><img src="/2021/05/10/tidb-databases-use/20210111145436285.png" alt="img"></p>
+<p><img src="/2021/05/10/tidb-databases-use/20210111145453391.png" alt="img"></p>
+<h4 id="4-4-2-准备迁移工具"><a href="#4-4-2-准备迁移工具" class="headerlink" title="4.4.2 准备迁移工具"></a>4.4.2 准备迁移工具</h4><pre><code>wget https://download.pingcap.org/tidb-enterprise-tools-latest-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-toolkit-latest-linux-amd64.tar.gz
+解压</code></pre><h4 id="4-4-3-准备MySQL数据"><a href="#4-4-3-准备MySQL数据" class="headerlink" title="4.4.3 准备MySQL数据"></a>4.4.3 准备MySQL数据</h4><pre><code>CREATE DATABASE mytest;
+USE mytest;
+
+CREATE TABLE mytest.t1 (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    c CHAR (32),
+    PORT INT
+);
+
+insert into t1 values (),(),(),(),(),(),(),();
+        insert into t1 (id) select null from t1;
+        insert into t1 (id) select null from t1;
+        insert into t1 (id) select null from t1;
+        insert into t1 (id) select null from t1;
+        insert into t1 (id) select null from t1;
+        update t1 set c=md5(id), port=@@port;
+
+CREATE TABLE mytest.t2 (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    c CHAR (32),
+    PORT INT
+);
+
+insert into t2 values (),(),(),(),(),(),(),();
+        insert into t2 (id) select null from t2;
+        insert into t2 (id) select null from t2;
+        insert into t2 (id) select null from t2;
+        insert into t2 (id) select null from t2;
+        insert into t2 (id) select null from t2;
+        update t2 set c=md5(id), port=@@port;</code></pre><h4 id="4-4-4-导出数据"><a href="#4-4-4-导出数据" class="headerlink" title="4.4.4 导出数据"></a>4.4.4 导出数据</h4><pre><code>mkdir -p /data/my_database/
+cd tidb-enterprise-tools-latest-linux-amd64/bin/
+./mydumper -h 127.0.0.1 -P 3306 -u root -p Root@1234 -t 16 -F 256 -B mytest -T t1,t2 --skip-tz-utc -o /data/my_database/
+cd /data/my_database</code></pre><p>其中：</p>
+<ul>
+<li><p>-B mytest ：从 mytest 数据库导出。</p>
+</li>
+<li><p>-T t1,t2：只导出 t1 和 t2 这两个表。</p>
+</li>
+<li><p>-t 16：使用 16 个线程导出数据。</p>
+</li>
+<li><p>-F 256：将每张表切分成多个文件，每个文件大小约为 256 MB。</p>
+</li>
+<li><p>–skip-tz-utc：添加这个参数则会忽略掉 TiDB 与导数据的机器之间时区设置不一致的情况，禁止自动转换。</p>
+<p>这样全量备份数据就导出到了/data/my_database目录中。</p>
+</li>
+</ul>
+<h4 id="4-4-5-启动tikv-importer"><a href="#4-4-5-启动tikv-importer" class="headerlink" title="4.4.5 启动tikv-importer"></a>4.4.5 启动tikv-importer</h4><pre><code>cd tidb-toolkit-v4.0.9-linux-amd64/bin/
+
+vim tikv-importer.toml</code></pre><pre><code># TiKV Importer 配置文件模版
+
+# 日志文件。
+log-file = &quot;tikv-importer.log&quot;
+# 日志等级：trace、debug、info、warn、error、off。
+log-level = &quot;info&quot;
+
+[server]
+# tikv-importer 监听的地址，tidb-lightning 需要连到这个地址进行数据写入。
+addr = &quot;192.168.19.130:8287&quot;
+
+[import]
+# 存储引擎文档 (engine file) 的文件夹路径。
+import-dir = &quot;/mnt/ssd/data.import/&quot;</code></pre><pre><code>nohup ./tikv-importer -C tikv-importer.toml &gt; nohup.out &amp;</code></pre><h4 id="4-4-6-启动tidb-lightning"><a href="#4-4-6-启动tidb-lightning" class="headerlink" title="4.4.6 启动tidb-lightning"></a>4.4.6 启动tidb-lightning</h4><pre><code>vim run.sh</code></pre><pre><code>#!/bin/bash
+nohup ./tidb-lightning \
+            --importer 192.168.19.130:8287 \
+            -d /data/my_database/ \
+            --pd-urls 0.0.0.0:2379 \
+            --tidb-host 192.168.19.130 \
+            --tidb-user root \
+            --log-file tidb-lightning.log \
+        &gt; nohup.out &amp;</code></pre><pre><code>chmod 755 run.sh
+./run.sh</code></pre><h4 id="4-4-7-注意"><a href="#4-4-7-注意" class="headerlink" title="4.4.7 注意"></a>4.4.7 注意</h4><p>内存有性能要求,使用单机版测试即可</p>
+<p>systemctl stop docker<br>cd tidb-v4.0.9-linux-amd64/<br>./bin/pd-server –data-dir=pd –log-file=pd.log &amp;<br>./bin/tikv-server –pd=”127.0.0.1:2379” –data-dir=tikv –log-file=tikv.log &amp;<br>./bin/tidb-server –store=tikv –path=”127.0.0.1:2379” –log-file=tidb.log &amp;</p>
+<h2 id="5、TiDB技术内幕"><a href="#5、TiDB技术内幕" class="headerlink" title="5、TiDB技术内幕"></a>5、TiDB技术内幕</h2><ul>
+<li><a href="https://pingcap.com/blog-cn/tidb-internal-1/" target="_blank" rel="noopener">TiDB 技术内幕 - 存储</a></li>
+<li><a href="https://pingcap.com/blog-cn/tidb-internal-2/" target="_blank" rel="noopener">TiDB 技术内幕 - 计算</a></li>
+<li><a href="https://pingcap.com/blog-cn/tidb-internal-3/" target="_blank" rel="noopener">TiDB 技术内幕 - 调度</a></li>
+</ul>
+<h2 id="6、TiDB-监控框架"><a href="#6、TiDB-监控框架" class="headerlink" title="6、TiDB 监控框架"></a>6、TiDB 监控框架</h2><p><a href="https://docs.pingcap.com/zh/tidb/stable/tidb-monitoring-framework" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable/tidb-monitoring-framework</a></p>
+<h2 id="6、生成亿级测试数据"><a href="#6、生成亿级测试数据" class="headerlink" title="6、生成亿级测试数据"></a>6、生成亿级测试数据</h2><p>建立tidb数据软连接</p>
+<pre><code>ln -s  /nvme_201931448402/tidb-data tidb-data
+ln -s  /nvme_201931448402/tidb-deploy tidb-deploy</code></pre><p>使用go-tpc工具生成数据，使用方式：</p>
+<ul>
+<li><a href="https://github.com/pingcap/go-tpc" target="_blank" rel="noopener">https://github.com/pingcap/go-tpc</a></li>
+<li><a href="https://github.com/pingcap/go-tpc/blob/master/docs/import-to-tidb.md" target="_blank" rel="noopener">https://github.com/pingcap/go-tpc/blob/master/docs/import-to-tidb.md</a></li>
+<li>数据量：<a href="https://docs.pingcap.com/zh/tidb/stable/benchmark-tidb-using-tpcc" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable/benchmark-tidb-using-tpcc</a></li>
+</ul>
+<ol>
+<li><p>编译go-tpc</p>
+</li>
+<li><pre><code>// 10000条warehouses记录，数据库名test，tidb：192.168.1.93：4000，16个线程
+./go-tpc tpcc prepare --warehouses 10000 -D test -H 192.168.1.93 -P 4000 -T 16 --output-type csv --output-dir csv/</code></pre></li>
+</ol>
+<ol start="3">
+<li><p>使用lightning导入数据<a href="https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-overview" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-overview</a></p>
+<pre><code>wget https://download.pingcap.org/tidb-toolkit-v4.0.8-linux-amd64.tar.gz
+
+// 修改配置
+vim tidb-lightning.toml</code></pre></li>
+</ol>
+<ol start="4">
+<li><p>执行导入</p>
+<pre><code>nohup ./tidb-toolkit-v4.0.8-linux-amd64/bin/tidb-lightning -config tidb-lightning.toml &gt; nohup.out &amp;</code></pre></li>
+</ol>
+<h3 id="6-1-测试数据库tpcc表结构"><a href="#6-1-测试数据库tpcc表结构" class="headerlink" title="6.1 测试数据库tpcc表结构"></a>6.1 测试数据库tpcc表结构</h3><p><strong>1、 warehouse：仓库表</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th align="center">描述</th>
+<th align="center">类型</th>
+<th align="center">键</th>
+<th align="center">为空</th>
+<th align="center">额外</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>w_id</code></td>
+<td align="center">仓库ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>w_name</code></td>
+<td align="center">仓库名称</td>
+<td align="center">varchar(10)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>w_street_1</code></td>
+<td align="center">街道</td>
+<td align="center">varchar(20)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>w_street_2</code></td>
+<td align="center"></td>
+<td align="center">varchar(20)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>w_city</code></td>
+<td align="center">城市</td>
+<td align="center">varchar(20)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center"><code>w_state</code></td>
+<td align="center">状态</td>
+<td align="center">char(2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center"><code>w_zip</code></td>
+<td align="center"></td>
+<td align="center">char(9)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center"><code>w_tax</code></td>
+<td align="center"></td>
+<td align="center">decimal(4,4)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center"><code>w_ytd</code></td>
+<td align="center"></td>
+<td align="center">decimal(12,2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>2、 customer：客户表</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th align="center">描述</th>
+<th align="center">类型</th>
+<th align="center">键</th>
+<th align="center">为空</th>
+<th align="center">额外</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>c_id</code></td>
+<td align="center">客户ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>c_d_id</code></td>
+<td align="center">地区ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>c_w_id</code></td>
+<td align="center">仓库ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>c_first</code></td>
+<td align="center"></td>
+<td align="center">varchar(16)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>c_middle</code></td>
+<td align="center"></td>
+<td align="center">char(2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center"><code>c_last</code></td>
+<td align="center"></td>
+<td align="center">varchar(16)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center"><code>c_street_1</code></td>
+<td align="center"></td>
+<td align="center">varchar(20)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center"><code>c_street_2</code></td>
+<td align="center"></td>
+<td align="center">varchar(20)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center"><code>c_city</code></td>
+<td align="center"></td>
+<td align="center">varchar(20)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center"><code>c_state</code></td>
+<td align="center"></td>
+<td align="center">char(2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center"><code>c_zip</code></td>
+<td align="center"></td>
+<td align="center">char(9)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center"><code>c_phone</code></td>
+<td align="center"></td>
+<td align="center">char(16)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center"><code>c_since</code></td>
+<td align="center"></td>
+<td align="center">datetime</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center"><code>c_credit</code></td>
+<td align="center"></td>
+<td align="center">char(2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center"><code>c_credit_lim</code></td>
+<td align="center"></td>
+<td align="center">decimal(12,2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center"><code>c_discount</code></td>
+<td align="center"></td>
+<td align="center">decimal(4,4)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center"><code>c_balance</code></td>
+<td align="center"></td>
+<td align="center">decimal(12,2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center"><code>c_ytd_payment</code></td>
+<td align="center"></td>
+<td align="center">decimal(12,2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center"><code>c_payment_cnt</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center"><code>c_delivery_cnt</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td align="center"><code>c_data</code></td>
+<td align="center"></td>
+<td align="center">varchar(500)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>3、 history：交易历史表</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th align="center">描述</th>
+<th align="center">类型</th>
+<th align="center">键</th>
+<th align="center">为空</th>
+<th align="center">额外</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>h_c_id</code></td>
+<td align="center">客户ID</td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>h_c_d_id</code></td>
+<td align="center">客户地区ID</td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>h_c_w_id</code></td>
+<td align="center">客户仓库ID</td>
+<td align="center">int(11)</td>
+<td align="center">MUL</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>h_d_id</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>h_w_id</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center">MUL</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center"><code>h_date</code></td>
+<td align="center"></td>
+<td align="center">datetime</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center"><code>h_amount</code></td>
+<td align="center"></td>
+<td align="center">decimal(6,2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center"><code>h_data</code></td>
+<td align="center"></td>
+<td align="center">varchar(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>4、 new_order：最新订单表</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th align="center">描述</th>
+<th align="center">类型</th>
+<th align="center">键</th>
+<th align="center">为空</th>
+<th align="center">额外</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>no_o_id</code></td>
+<td align="center">订单ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>no_d_id</code></td>
+<td align="center">地区ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>no_w_id</code></td>
+<td align="center">仓库ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>5、 orders：订单表</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th align="center">描述</th>
+<th align="center">类型</th>
+<th align="center">键</th>
+<th align="center">为空</th>
+<th align="center">额外</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>o_id</code></td>
+<td align="center">订单ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>o_d_id</code></td>
+<td align="center">地区ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>o_w_id</code></td>
+<td align="center">仓库ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>o_c_id</code></td>
+<td align="center">客户ID</td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>o_entry_d</code></td>
+<td align="center"></td>
+<td align="center">datetime</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center"><code>o_carrier_id</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center"><code>o_ol_cnt</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center"><code>o_all_local</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>6、 order_line：订单记录</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th align="center">描述</th>
+<th align="center">类型</th>
+<th align="center">键</th>
+<th align="center">为空</th>
+<th align="center">额外</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>ol_o_id</code></td>
+<td align="center">订单ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>ol_d_id</code></td>
+<td align="center">地区ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>ol_w_id</code></td>
+<td align="center">仓库ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>ol_number</code></td>
+<td align="center">数量</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>ol_i_id</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center"><code>ol_supply_w_id</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center"><code>ol_delivery_d</code></td>
+<td align="center"></td>
+<td align="center">datetime</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center"><code>ol_quantity</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center"><code>ol_amount</code></td>
+<td align="center"></td>
+<td align="center">decimal(6,2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center"><code>ol_dist_info</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>7、 stock：库存表</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th align="center">描述</th>
+<th align="center">类型</th>
+<th align="center">键</th>
+<th align="center">为空</th>
+<th align="center">额外</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>s_i_id</code></td>
+<td align="center">商品ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>s_w_id</code></td>
+<td align="center">仓库ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>s_quantity</code></td>
+<td align="center">数量</td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>s_dist_01</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>s_dist_02</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center"><code>s_dist_03</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center"><code>s_dist_04</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center"><code>s_dist_05</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center"><code>s_dist_06</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center"><code>s_dist_07</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center"><code>s_dist_08</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center"><code>s_dist_09</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center"><code>s_dist_10</code></td>
+<td align="center"></td>
+<td align="center">char(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center"><code>s_ytd</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center"><code>s_order_cnt</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center"><code>s_remote_cnt</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center"><code>s_data</code></td>
+<td align="center"></td>
+<td align="center">varchar(50)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>8、 item：商品表</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th align="center">描述</th>
+<th align="center">类型</th>
+<th align="center">键</th>
+<th align="center">为空</th>
+<th align="center">额外</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>i_id</code></td>
+<td align="center">ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>i_im_id</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>i_name</code></td>
+<td align="center">商品名</td>
+<td align="center">varchar(24)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>i_price</code></td>
+<td align="center">商品价格</td>
+<td align="center">decimal(5,2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>i_data</code></td>
+<td align="center"></td>
+<td align="center">varchar(50)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>9、 district：地区表</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th align="center">描述</th>
+<th align="center">类型</th>
+<th align="center">键</th>
+<th align="center">为空</th>
+<th align="center">额外</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>d_id</code></td>
+<td align="center">区域ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"><code>d_w_id</code></td>
+<td align="center">仓库ID</td>
+<td align="center">int(11)</td>
+<td align="center">PRI</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>d_name</code></td>
+<td align="center"></td>
+<td align="center">varchar(10)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>d_street_1</code></td>
+<td align="center"></td>
+<td align="center">varchar(20)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>d_street_2</code></td>
+<td align="center"></td>
+<td align="center">varchar(20)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center"><code>d_city</code></td>
+<td align="center"></td>
+<td align="center">varchar(20)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center"><code>d_state</code></td>
+<td align="center"></td>
+<td align="center">char(2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center"><code>d_zip</code></td>
+<td align="center"></td>
+<td align="center">char(9)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center"><code>d_tax</code></td>
+<td align="center"></td>
+<td align="center">decimal(4,4)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center"><code>d_ytd</code></td>
+<td align="center"></td>
+<td align="center">decimal(12,2)</td>
+<td align="center"></td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center"><code>d_next_o_id</code></td>
+<td align="center"></td>
+<td align="center">int(11)</td>
+<td align="center">MUL</td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="7、文档连接"><a href="#7、文档连接" class="headerlink" title="7、文档连接"></a>7、文档连接</h2><p><strong>TiDB中文简介</strong></p>
+<blockquote>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable</a></p>
+<p><a href="https://pingcap.com/blog-cn/" target="_blank" rel="noopener">https://pingcap.com/blog-cn/</a></p>
+</blockquote>
+<p><strong>TiDB最佳实践等PPT</strong></p>
+<blockquote>
+<p><a href="https://link.zhihu.com/?target=https%3A//eyun.baidu.com/s/3huniXE0%23sharelink/path%3D%2F" target="_blank" rel="noopener">https://eyun.baidu.com/s/3huniXE0#sharelink/path=%2F</a></p>
+</blockquote>
+<p><strong>开源项目地址</strong></p>
+<blockquote>
+<ul>
+<li><a href="https://github.com/pingcap/tidb" target="_blank" rel="noopener">TiDB</a></li>
+<li><a href="https://github.com/tikv/tikv" target="_blank" rel="noopener">TiKV</a></li>
+<li><a href="https://github.com/tikv/pd" target="_blank" rel="noopener">PD</a></li>
+<li><a href="https://github.com/pingcap/tispark" target="_blank" rel="noopener">TiSpark</a></li>
+<li><a href="https://github.com/pingcap/tidb-operator" target="_blank" rel="noopener">TiDB Operator</a></li>
+</ul>
+</blockquote>
+<p><strong>TiDB 部署指导</strong></p>
+<blockquote>
+<p><a href="https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable/hardware-and-software-requirements</a></p>
+</blockquote>
+<p><strong>TiDB整体架构</strong></p>
+<blockquote>
+<p><a href="https://link.zhihu.com/?target=https%3A//github.com/pingcap/docs-cn/blob/master/overview.md%23tidb-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84" target="_blank" rel="noopener">https://github.com/pingcap/docs-cn/blob/master/overview.md#tidb-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84</a></p>
+</blockquote>
+<p><strong>TiDB：入门</strong></p>
+<blockquote>
+<p><a href="https://www.bilibili.com/video/BV1Xz4y1Q79U?from=search&amp;seid=10178516505465195871" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1Xz4y1Q79U?from=search&amp;seid=10178516505465195871</a></p>
+</blockquote>
+<p><strong>prometheus</strong></p>
+<blockquote>
+<p><a href="https://yunlzheng.gitbook.io/prometheus-book/parti-prometheus-ji-chu/promql/prometheus-metrics-types" target="_blank" rel="noopener">https://yunlzheng.gitbook.io/prometheus-book/parti-prometheus-ji-chu/promql/prometheus-metrics-types</a></p>
+</blockquote>
+
+            </div>
+            <hr />
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+        -o-transform: scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">
+                写作不易，客官能否打赏一杯奶茶？
+            </h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+                    
+
+                        <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+                            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《NewSql数据库TiDB》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2021/05/10/tidb-databases-use/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                bill
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '查教程获取',
+        clientSecret: '查教程获取',
+        repo: 'billbliu.github.io',
+        owner: 'billbliu',
+        admin: "billbliu",
+        id: '2021/05/10/tidb-databases-use/',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+            
+
+                
+
+                            
+
+                                        
+
+                                                    
+                                                        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments input[type=text],
+    #vcomments input[type=email],
+    #vcomments input[type=url],
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<!-- <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script> -->
+
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '查教程获取',
+        appKey: '查教程获取',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'false' === 'true',
+        avatar: 'wavatar',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '如果你没有GitHub账号，还可以在这里评论啦！'
+    });
+</script>
+
+                                                            
+
+                                                                
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/05/10/tidb-databases-use/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="NewSql数据库TiDB">
+                        
+                        <span class="card-title">NewSql数据库TiDB</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            1、TiDB引入1.1. 数据库技术发展简史​        数据库技术产生于20世纪60年代末70年代初，其主要主要研究如何存储，使用和管理数据。随着计算机硬件和软件的发展，数据库技术也不断地发展。数据库技术在理论研究和系统开发上都取得了
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2021-05-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/数据库/" class="post-category" target="_blank">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/TiDB/" target="_blank">
+                        <span class="chip bg-color">TiDB</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/04/16/rust-pattern-matching/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Rust模式匹配">
+                        
+                        <span class="card-title">Rust模式匹配</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+https://en.wikipedia.org/wiki/Pattern_matching
+https://baike.baidu.com/item/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D
+
+
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2021-04-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/书籍专栏/" class="post-category" target="_blank">
+                                    书籍专栏
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Rust/" target="_blank">
+                        <span class="chip bg-color">Rust</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    <script>
+        $('#articleContent').on('copy', function (e) {
+            // IE8 or earlier browser is 'undefined'
+            if (typeof window.getSelection === 'undefined') return;
+
+            var selection = window.getSelection();
+            // if the selection is short let's not annoy our users.
+            if (('' + selection).length < Number.parseInt('120')) {
+                return;
+            }
+
+            // create a div outside of the visible area and fill it with the selected text.
+            var bodyElement = document.getElementsByTagName('body')[0];
+            var newdiv = document.createElement('div');
+            newdiv.style.position = 'absolute';
+            newdiv.style.left = '-99999px';
+            bodyElement.appendChild(newdiv);
+            newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+            // we need a <pre> tag workaround.
+            // otherwise the text inside "pre" loses all the line breaks!
+            if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+                newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+            }
+
+            var url = document.location.href;
+            newdiv.innerHTML += '<br />'
+                + '来源: bill的博客<br />'
+                + '作者: bill<br />'
+                + '链接: <a href="' + url + '">' + url + '</a><br />'
+                + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+            selection.selectAllChildren(newdiv);
+            window.setTimeout(function () { bodyElement.removeChild(newdiv); }, 200);
+        });
+    </script>
+
+    <!--<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+    <script>
+        const btw = new BTWPlugin();
+        btw.init({
+            id: 'artDetail',
+            blogId: '20962-1585405055583-879',
+            name: '算法码上来',
+            qrcode: 'https://godweiyang.com/medias/gzh.jpg',
+            keyword: 'VIP',
+        });
+    </script>
+-->
+    
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy; Bill. 版权所有
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">
+                    440.3k
+                </span>
+                
+
+                    <br>
+                    <span id="sitetime"></span>
+
+                    
+                        
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+            
+    <a href="https://github.com/billbliu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:billliu201919@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=1321531943&site=qq&menu=yes" class="tooltipped" target="_blank" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+
+        </div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+    $(document).ready(function () {
+
+        // 50ms周期检测函数
+        var int = setInterval(fixCount, 50);
+        var pvcountOffset = 80000;
+        var uvcountOffset = 20000;
+
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int);
+            }
+        }
+    });
+</script>
+
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2021, 03, 01, 00, 00, 00); //北京时间2018-2-13 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+    }/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+    siteTime();
+</script>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <script type="text/javascript"> var OriginTitile = document.title, st; document.addEventListener("visibilitychange", function () { document.hidden ? (document.title = "Σ(っ °Д °;)っ喔哟，崩溃啦！", clearTimeout(st)) : (document.title = "φ(゜▽゜*)♪咦，又好了！", st = setTimeout(function () { document.title = OriginTitile }, 3e3)) })
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=查教程获取"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '查教程获取');
+</script>
+
+
+
+    
+    <script src="/libs/others/clicklove.js"></script>
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+
+</html>

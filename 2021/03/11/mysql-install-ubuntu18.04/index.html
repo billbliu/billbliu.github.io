@@ -323,7 +323,7 @@ sudo apt-get install mysql-se">
 
 
 
-    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/24.jpg')">
+    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12">
@@ -489,7 +489,7 @@ sudo apt-get install mysql-se">
                         <div class="info-break-policy">
                             <i class="fa fa-file-word-o fa-fw"></i>
                             文章字数:&nbsp;&nbsp;
-                                560
+                                1.4k
                         </div>
                         
 
@@ -497,7 +497,7 @@ sudo apt-get install mysql-se">
                                 <div class="info-break-policy">
                                     <i class="fa fa-clock-o fa-fw"></i>
                                     阅读时长:&nbsp;&nbsp;
-                                        2
+                                        5
                                             分
                                 </div>
                                 
@@ -573,6 +573,57 @@ mysql> grant all on *.* to root@'localhost' identified by 'ars123456' with grant
 # 刷新权限
 mysql> flush privileges;    
 mysql> exit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="4、Linux下彻底卸载MySQL"><a href="#4、Linux下彻底卸载MySQL" class="headerlink" title="4、Linux下彻底卸载MySQL"></a>4、Linux下彻底卸载MySQL</h2><p> 说起Linux下卸载<a href="https://cloud.tencent.com/product/cdb?from=10680" target="_blank" rel="noopener">MySQL</a>最让人头疼，卸载不干净，会影响下一次的安装，本人最近就遇到了这个问题，下面就是我对这个问题的解决方法。</p>
+<p>  首先介绍一下本人的环境，本人使用的是Ubuntu18.04系统，MySQL使用的是5.5版本。</p>
+<h3 id="4-1-查看MySQL的安装情况"><a href="#4-1-查看MySQL的安装情况" class="headerlink" title="4.1 查看MySQL的安装情况"></a>4.1 查看MySQL的安装情况</h3><p>  使用以下命令查看当前安装mysql情况，查找以前是否装有mysql。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">rpm <span class="token operator">-</span>qa<span class="token operator">|</span>grep <span class="token operator">-</span>i mysql  <span class="token comment" spellcheck="true">// dpkg --list|grep mysql</span>
+
+MySQL<span class="token operator">-</span>client<span class="token number">-5.5</span><span class="token punctuation">.</span>25a<span class="token number">-1</span><span class="token punctuation">.</span>rhel5
+MySQL<span class="token operator">-</span>server<span class="token number">-5.5</span><span class="token punctuation">.</span>25a<span class="token number">-1</span><span class="token punctuation">.</span>rhel5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  如果之前安装了MySQL，那么会出现如上的显示。</p>
+<h3 id="4-2卸载MySQL"><a href="#4-2卸载MySQL" class="headerlink" title="4.2卸载MySQL"></a>4.2卸载MySQL</h3><h4 id="4-2-1-停止服务"><a href="#4-2-1-停止服务" class="headerlink" title="4.2.1 停止服务"></a>4.2.1 停止服务</h4><p>  卸载MySQL之前，需要停止mysql服务。使用如下命令进行停止服务：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">service mysql stop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="4-2-2-卸载MySQL"><a href="#4-2-2-卸载MySQL" class="headerlink" title="4.2.2 卸载MySQL"></a>4.2.2 卸载MySQL</h4><p>  卸载之前安装的mysql，卸载命令如下：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">rpm <span class="token operator">-</span>ev MySQL<span class="token operator">-</span>client<span class="token number">-5.5</span><span class="token punctuation">.</span>25a<span class="token number">-1</span><span class="token punctuation">.</span>rhel5
+rpm <span class="token operator">-</span>ev MySQL<span class="token operator">-</span>server<span class="token number">-5.5</span><span class="token punctuation">.</span>25a<span class="token number">-1</span><span class="token punctuation">.</span>rhel5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>  如果提示依赖包错误，则使用以下命令尝试:</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">rpm <span class="token operator">-</span>ev MySQL<span class="token operator">-</span>client<span class="token number">-5.5</span><span class="token punctuation">.</span>25a<span class="token number">-1</span><span class="token punctuation">.</span>rhel5 <span class="token operator">--</span>nodeps<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  如果提示错误：error: %preun(xxxxxx) scriptlet failed, exit status 1</p>
+<p>  则用以下命令尝试：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">rpm <span class="token operator">-</span>e <span class="token operator">--</span>noscripts MySQL<span class="token operator">-</span>client<span class="token number">-5.5</span><span class="token punctuation">.</span>25a<span class="token number">-1</span><span class="token punctuation">.</span>rhel5<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="4-3-删除MySQL目录"><a href="#4-3-删除MySQL目录" class="headerlink" title="4.3 删除MySQL目录"></a>4.3 删除MySQL目录</h3><h4 id="4-3-1-查看目录"><a href="#4-3-1-查看目录" class="headerlink" title="4.3.1 查看目录"></a>4.3.1 查看目录</h4><p>  查找之前安装mysql使用的目录，命令及结果如下：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">find <span class="token operator">/</span> <span class="token operator">-</span>name mysql
+
+<span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>lib<span class="token operator">/</span>mysql
+<span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>lib<span class="token operator">/</span>mysql<span class="token operator">/</span>mysql
+<span class="token operator">/</span>usr<span class="token operator">/</span>lib64<span class="token operator">/</span>mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  本人这里有三个目录为MySQL使用的目录。</p>
+<h4 id="4-3-2-删除目录"><a href="#4-3-2-删除目录" class="headerlink" title="4.3.2 删除目录"></a>4.3.2 删除目录</h4><p>  删除对应的mysql目录，命令如下：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">rm <span class="token operator">-</span>rf <span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>lib<span class="token operator">/</span>mysql
+rm <span class="token operator">-</span>rf <span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>lib<span class="token operator">/</span>mysql
+rm <span class="token operator">-</span>rf <span class="token operator">/</span>usr<span class="token operator">/</span>lib64<span class="token operator">/</span>mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>  这里删除的目录是上面查找到的目录，上面查找到的所有目录都要删除。</p>
+<h4 id="4-3-3-删除文件"><a href="#4-3-3-删除文件" class="headerlink" title="4.3.3 删除文件"></a>4.3.3 删除文件</h4><p>  卸载后/etc/my.cnf不会删除，需要进行手工删除，命令如下：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">rm <span class="token operator">-</span>rf <span class="token regex">/etc/my</span><span class="token punctuation">.</span>cnf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="4-4-检查卸载"><a href="#4-4-检查卸载" class="headerlink" title="4.4 检查卸载"></a>4.4 检查卸载</h3><p>  最后再次使用rpm命令进行查看是否安装mysql，命令如下。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">rpm <span class="token operator">-</span>qa<span class="token operator">|</span>grep <span class="token operator">-</span>i mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  使用完次命令如果没有结果，说明已经卸载彻底，接下来直接安装mysql即可。</p>
+<p>  如果有，则按照上述步骤重复进行即可。</p>
+<h3 id="4-5-ubuntu下卸载mysql"><a href="#4-5-ubuntu下卸载mysql" class="headerlink" title="4.5 ubuntu下卸载mysql"></a>4.5 ubuntu下卸载mysql</h3><p>本文教你如何快速的在Ubuntu18.04操作系统下彻底删除MySQL，以下针对的是5.7版本，其它的版本可以自行调整运行指令。</p>
+<p>注：采用sudo apt install mysql-server命令的方式默认安装的是MySQL5.7，MySQL5.7版本最高只适配到Ubuntu17.04，不支持Ubuntu18.04，MySQL8.0可适配到Ubuntu18.04故如果系统使用的Ubuntu18.04，只能安装MySQL8.0，而且加密方式需要选择5.x的加密，因为有兼容性问题，如果你已经执行了上边的命令，安装了MySQL5.7，需要先卸载。不过，如果你还没有安装5.7版本，且仍然想要安装5.7版本，请按<a href="https://ywnz.com/linuxysjk/2517.html" target="_blank" rel="noopener">Ubuntu 18.04系统中安装mysql 5.7数据库</a>一文操作。</p>
+<p>首先在系统终端中查看MySQL的依赖项，运行命令：dpkg –list|grep mysql</p>
+<p><img src="/2021/03/11/mysql-install-ubuntu18.04/1-1P9251026121b.JPG" alt="在Ubuntu18.04系统下彻底删除MySQL的方法"></p>
+<p>卸载命令：sudo apt-get remove mysql-common</p>
+<p><img src="/2021/03/11/mysql-install-ubuntu18.04/1-1P925102620917.JPG" alt="在Ubuntu18.04系统下彻底删除MySQL的方法"></p>
+<p>卸载命令：sudo apt-get autoremove –purge mysql-server-5.7</p>
+<p><img src="/2021/03/11/mysql-install-ubuntu18.04/1-1P925102630541.JPG" alt="在Ubuntu18.04系统下彻底删除MySQL的方法"></p>
+<p>清除残留数据，运行命令：dpkg -l|grep ^rc|awk ‘{print$2}’|sudo xargs dpkg -P</p>
+<p><img src="/2021/03/11/mysql-install-ubuntu18.04/1-1P92510263b43.JPG" alt="在Ubuntu18.04系统下彻底删除MySQL的方法"></p>
+<p>再次查看MySQL的剩余依赖项，运行命令：dpkg –list|grep mysql</p>
+<p><img src="/2021/03/11/mysql-install-ubuntu18.04/1-1P92510264T20.JPG" alt="在Ubuntu18.04系统下彻底删除MySQL的方法"></p>
+<p>继续删除剩余依赖项，如：sudo apt-get autoremove –purge mysql-apt-config</p>
+<p><img src="/2021/03/11/mysql-install-ubuntu18.04/1-1P925102AY58.JPG" alt="在Ubuntu18.04系统下彻底删除MySQL的方法"></p>
+<p>至此已经没有了MySQL的依赖项，彻底删除MySQL5.7版本了。</p>
 
             </div>
             <hr />
@@ -1066,7 +1117,7 @@ mysql> exit<span aria-hidden="true" class="line-numbers-rows"><span></span><span
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Linux关闭防火墙命令">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Linux关闭防火墙命令">
                         
                         <span class="card-title">Linux关闭防火墙命令</span>
                     </div>
@@ -1119,7 +1170,7 @@ service  iptables status
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="ubuntu18.04 redis安装配置">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="ubuntu18.04 redis安装配置">
                         
                         <span class="card-title">ubuntu18.04 redis安装配置</span>
                     </div>
@@ -1348,7 +1399,7 @@ Redis 控制
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
                 <span class="white-color">
-                    92.5k
+                    440.3k
                 </span>
                 
 
