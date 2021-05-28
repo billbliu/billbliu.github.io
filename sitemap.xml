@@ -2,6 +2,111 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://billbliu.github.io/2020/03/11/vim-config/</loc>
+    
+    <lastmod>2021-05-28T10:22:17.479Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2021/03/11/hexo-blog/</loc>
+    
+    <lastmod>2021-05-28T07:47:04.694Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/03/11/linux-cmd-network-info/</loc>
+    
+    <lastmod>2021-05-27T08:58:36.101Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/02/11/k8s-uninstall/</loc>
+    
+    <lastmod>2021-05-27T08:45:38.493Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/03/11/linux-shell-problem1/</loc>
+    
+    <lastmod>2021-05-27T08:44:54.362Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/03/11/linux-disk-search-big-file/</loc>
+    
+    <lastmod>2021-05-27T08:44:43.160Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2019/07/11/go-proxy/</loc>
+    
+    <lastmod>2021-05-27T08:31:44.952Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/03/11/go-mod-use2/</loc>
+    
+    <lastmod>2021-05-27T08:25:50.224Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/03/11/linux-disk-info/</loc>
+    
+    <lastmod>2021-05-27T07:55:57.162Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/03/11/linux-mirror-problem1/</loc>
+    
+    <lastmod>2021-05-27T07:45:37.602Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/02/11/linux-net-tcpdump/</loc>
+    
+    <lastmod>2021-05-27T07:42:32.616Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/02/11/linux-alias/</loc>
+    
+    <lastmod>2021-05-27T06:55:53.593Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/03/11/ubuntu-config-01/</loc>
+    
+    <lastmod>2021-05-26T09:42:37.277Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/03/11/rust-string/</loc>
+    
+    <lastmod>2021-05-25T01:11:13.808Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://billbliu.github.io/2020/03/11/development-tools/</loc>
+    
+    <lastmod>2021-05-24T03:29:08.806Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://billbliu.github.io/2020/04/26/mac-user-permissions/</loc>
     
     <lastmod>2021-05-24T02:28:13.024Z</lastmod>
@@ -19,13 +124,6 @@
     <loc>https://billbliu.github.io/2020/03/11/leetcode-all/</loc>
     
     <lastmod>2021-05-24T02:16:03.338Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://billbliu.github.io/2021/03/11/hexo-blog/</loc>
-    
-    <lastmod>2021-05-24T02:15:29.674Z</lastmod>
     
   </url>
   
@@ -352,13 +450,6 @@
   </url>
   
   <url>
-    <loc>https://billbliu.github.io/2020/03/11/linux-cmd-network-info/</loc>
-    
-    <lastmod>2021-04-14T10:11:39.305Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://billbliu.github.io/2020/03/11/linux-cmd-disk-df/</loc>
     
     <lastmod>2021-04-14T10:11:13.192Z</lastmod>
@@ -450,14 +541,14 @@
   </url>
   
   <url>
-    <loc>https://billbliu.github.io/categories/index.html</loc>
+    <loc>https://billbliu.github.io/archives/index.html</loc>
     
     <lastmod>2021-01-19T14:08:59.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://billbliu.github.io/archives/index.html</loc>
+    <loc>https://billbliu.github.io/categories/index.html</loc>
     
     <lastmod>2021-01-19T14:08:59.000Z</lastmod>
     

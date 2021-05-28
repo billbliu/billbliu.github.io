@@ -319,7 +319,7 @@ Disk /dev/sd">
 
 
 
-    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/27.jpg')">
+    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12">
@@ -1052,7 +1052,7 @@ Disk identifier: 05120572-BCE8-4A9B-ABB0-492A152E43F2
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="linux网络命令">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="linux网络命令">
                         
                         <span class="card-title">linux网络命令</span>
                     </div>
@@ -1060,9 +1060,10 @@ Disk identifier: 05120572-BCE8-4A9B-ABB0-492A152E43F2
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            如何查看网口类型// 使用ethtool enp14s0f0,通过下面输出可以看到speed那一行，表示万兆网还是千兆网
-root@ceph2:~# ifconfig 
-enp14s0f0: flags=4163&lt;UP,BROADCA
+                            查看所有网卡总线号root@tidb3:~# ll /sys/class/net/
+total 0
+drwxr-xr-x  2 root root 0 May 27 11:38 ./
+drwxr-xr-x 73 root root 0 Ma
                         
                     </div>
                     <div class="publish-info">
@@ -1099,21 +1100,21 @@ enp14s0f0: flags=4163&lt;UP,BROADCA
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/11/linux-disk-mount-problem1/">
+                <a href="/2020/03/11/linux-cmd-disk-df/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="linux磁盘挂载时报错“linux_raid_member”">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="linux磁盘命令df">
                         
-                        <span class="card-title">linux磁盘挂载时报错“linux_raid_member”</span>
+                        <span class="card-title">linux磁盘命令df</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            重装了一台系统，分区格式化后挂载一个磁盘出错
-[root@CM-MM-sve-111 ~]# mount /dev/sdh1 /mnt
-mount: unknown filesystem type &#39;linux_raid_membe
+                            sed -n 1p取结果的第一行
+root@ceph6:~# df -k |grep /dev/sda | sed -n 1p
+/dev/sda       15501613664 605347028 14114956276   5% /h
                         
                     </div>
                     <div class="publish-info">
@@ -1135,8 +1136,8 @@ mount: unknown filesystem type &#39;linux_raid_membe
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/linux问题/" target="_blank">
-                        <span class="chip bg-color">linux问题</span>
+                    <a href="/tags/命令详解/" target="_blank">
+                        <span class="chip bg-color">命令详解</span>
                     </a>
                     
                 </div>
@@ -1324,7 +1325,7 @@ mount: unknown filesystem type &#39;linux_raid_membe
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
                 <span class="white-color">
-                    440.3k
+                    445.9k
                 </span>
                 
 

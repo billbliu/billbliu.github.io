@@ -319,7 +319,7 @@ mount: unknown filesystem type &amp;#39;linux_raid_membe">
 
 
 
-    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12">
@@ -1008,21 +1008,20 @@ OK</code></pre>
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/11/linux-disk-formatting-problem1/">
+                <a href="/2020/03/11/linux-disk-search-big-file/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="ubuntu18.04磁盘格式化被占用">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="linux磁盘查找大文件">
                         
-                        <span class="card-title">ubuntu18.04磁盘格式化被占用</span>
+                        <span class="card-title">linux磁盘查找大文件</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            问题说明新装的Linux系统，两块硬盘，一块作为系统磁盘，另一块作为数据磁盘，安装完系统后，由于该数据磁盘中包含之前残余的LVM信息，无法对数据磁盘无法进行操作。
-新系统启动后，通过fdisk -l查看磁盘信息如下
-Disk /dev/sd
+                            先把所以磁盘卸载掉，然后再去查找系统盘大文件，因为有可能是系统盘里建了一个和磁盘相同的目录然后拷贝了相同的文件导致的(系统盘有个目录、跟磁盘里的文件内容相同)
+1、du命令root@hos132_231:~# sudo du -ah /ro
                         
                     </div>
                     <div class="publish-info">
@@ -1044,8 +1043,8 @@ Disk /dev/sd
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/linux问题/" target="_blank">
-                        <span class="chip bg-color">linux问题</span>
+                    <a href="/tags/命令详解/" target="_blank">
+                        <span class="chip bg-color">命令详解</span>
                     </a>
                     
                 </div>
@@ -1059,27 +1058,21 @@ Disk /dev/sd
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/11/linux-disk-raid0/">
+                <a href="/2020/03/11/linux-mirror-problem1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="ubuntu18.04软RAID0方法">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="linux系统、再生龙系统发生your installation CD-ROM couldn't be mounted">
                         
-                        <span class="card-title">ubuntu18.04软RAID0方法</span>
+                        <span class="card-title">linux系统、再生龙系统发生your installation CD-ROM couldn't be mounted</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-
-n代表硬盘总数 
-
-JBOD（Just a Bunch Of Disks）指将数个物理硬盘, 在操作系统中合并成⼀个逻辑硬盘, 以直接增加容量 
-
-依不同RAID⼚商实现算法对于性能表现会有不同, 性能公式仅供参考 
-
-RAID10、5
+                            解决方案：
+1.在Boot&gt;下输入看看有哪些选项，然后选择install
+2.安装界面(就是选择语言，设置用户名密码，分区等引导的界面)倒数第二个会有个execute a shell选项。选择execute a shell后，会有执行
                         
                     </div>
                     <div class="publish-info">
@@ -1101,8 +1094,8 @@ RAID10、5
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/命令详解/" target="_blank">
-                        <span class="chip bg-color">命令详解</span>
+                    <a href="/tags/linux问题/" target="_blank">
+                        <span class="chip bg-color">linux问题</span>
                     </a>
                     
                 </div>
@@ -1290,7 +1283,7 @@ RAID10、5
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
                 <span class="white-color">
-                    440.3k
+                    445.9k
                 </span>
                 
 

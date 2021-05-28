@@ -8,9 +8,10 @@
     <meta name="baidu-site-verification" content="fmlEuI34ir">
     <meta name="google-site-verification" content="yCy2azpds5XSuGZvis6OuA-XIGF5GuGpYRAaGfD6o48">
     <meta name="360-site-verification" content="b7c11a830ef90fd1464ad6206bb7b6e7">
-    <meta name="description" content="如何查看网口类型// 使用ethtool enp14s0f0,通过下面输出可以看到speed那一行，表示万兆网还是千兆网
-root@ceph2:~# ifconfig 
-enp14s0f0: flags=4163&amp;lt;UP,BROADCA">
+    <meta name="description" content="查看所有网卡总线号root@tidb3:~# ll /sys/class/net/
+total 0
+drwxr-xr-x  2 root root 0 May 27 11:38 ./
+drwxr-xr-x 73 root root 0 Ma">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -319,7 +320,7 @@ enp14s0f0: flags=4163&amp;lt;UP,BROADCA">
 
 
 
-    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col s12 m12 l12">
@@ -479,7 +480,7 @@ enp14s0f0: flags=4163&amp;lt;UP,BROADCA">
                         <div class="info-break-policy">
                             <i class="fa fa-file-word-o fa-fw"></i>
                             文章字数:&nbsp;&nbsp;
-                                677
+                                1.1k
                         </div>
                         
 
@@ -487,7 +488,7 @@ enp14s0f0: flags=4163&amp;lt;UP,BROADCA">
                                 <div class="info-break-policy">
                                     <i class="fa fa-clock-o fa-fw"></i>
                                     阅读时长:&nbsp;&nbsp;
-                                        4
+                                        6
                                             分
                                 </div>
                                 
@@ -499,7 +500,16 @@ enp14s0f0: flags=4163&amp;lt;UP,BROADCA">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="如何查看网口类型"><a href="#如何查看网口类型" class="headerlink" title="如何查看网口类型"></a>如何查看网口类型</h2><pre><code>// 使用ethtool enp14s0f0,通过下面输出可以看到speed那一行，表示万兆网还是千兆网
+                <h2 id="查看所有网卡总线号"><a href="#查看所有网卡总线号" class="headerlink" title="查看所有网卡总线号"></a>查看所有网卡总线号</h2><pre><code>root@tidb3:~# ll /sys/class/net/
+total 0
+drwxr-xr-x  2 root root 0 May 27 11:38 ./
+drwxr-xr-x 73 root root 0 May 27 11:38 ../
+lrwxrwxrwx  1 root root 0 May 27 11:38 enp10s0f0 -&gt; ../../devices/pci0000:00/0000:00:04.1/0000:0a:00.0/net/enp10s0f0/
+lrwxrwxrwx  1 root root 0 May 27 11:38 enp10s0f1 -&gt; ../../devices/pci0000:00/0000:00:04.1/0000:0a:00.1/net/enp10s0f1/
+lrwxrwxrwx  1 root root 0 May 27 11:38 enp193s0f0 -&gt; ../../devices/pci0000:c0/0000:c0:01.1/0000:c1:00.0/net/enp193s0f0/
+lrwxrwxrwx  1 root root 0 May 27 11:38 enp193s0f1 -&gt; ../../devices/pci0000:c0/0000:c0:01.1/0000:c1:00.1/net/enp193s0f1/
+lrwxrwxrwx  1 root root 0 May 27 11:38 lo -&gt; ../../devices/virtual/net/lo/
+</code></pre><h2 id="如何查看网口类型"><a href="#如何查看网口类型" class="headerlink" title="如何查看网口类型"></a>如何查看网口类型</h2><pre><code>// 使用ethtool enp14s0f0,通过下面输出可以看到speed那一行，表示万兆网还是千兆网
 root@ceph2:~# ifconfig 
 enp14s0f0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
         inet 10.3.7.35  netmask 255.255.0.0  broadcast 10.3.255.255
@@ -610,6 +620,30 @@ Settings for enp15s0:
                    drv probe link
     Link detected: yes
 root@ceph2:~# 
+</code></pre><h2 id="如何查看哪些网口插了网线"><a href="#如何查看哪些网口插了网线" class="headerlink" title="如何查看哪些网口插了网线"></a>如何查看哪些网口插了网线</h2><pre><code>// 网口中UP代表插了网线
+root@tidb3:~# ip addr
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp10s0f0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether a0:42:3f:47:d9:39 brd ff:ff:ff:ff:ff:ff
+3: enp10s0f1: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether a0:42:3f:47:d9:3a brd ff:ff:ff:ff:ff:ff
+4: enp193s0f0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether a0:42:3f:48:f0:96 brd ff:ff:ff:ff:ff:ff
+    inet 10.3.64.3/16 brd 10.3.255.255 scope global enp193s0f0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a242:3fff:fe48:f096/64 scope link 
+       valid_lft forever preferred_lft forever
+5: enp193s0f1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether a0:42:3f:48:f0:97 brd ff:ff:ff:ff:ff:ff
+    inet 10.4.64.3/16 brd 10.4.255.255 scope global enp193s0f1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a242:3fff:fe48:f097/64 scope link 
+       valid_lft forever preferred_lft forever
 </code></pre>
             </div>
             <hr />
@@ -1099,21 +1133,22 @@ root@ceph2:~#
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/11/linux-cmd-disk-df/">
+                <a href="/2020/03/11/go-mod-use2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="linux磁盘命令df">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="gomod使用">
                         
-                        <span class="card-title">linux磁盘命令df</span>
+                        <span class="card-title">gomod使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            sed -n 1p取结果的第一行
-root@ceph6:~# df -k |grep /dev/sda | sed -n 1p
-/dev/sda       15501613664 605347028 14114956276   5% /h
+                            在go mod 的require里面引入项目的last commit id由于不知道哪个版本号，那么在require里面使用最近一次提交的commit id: 510aa62
+go 1.3.3
+require (
+    git.xx.cn
                         
                     </div>
                     <div class="publish-info">
@@ -1124,8 +1159,8 @@ root@ceph6:~# df -k |grep /dev/sda | sed -n 1p
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/linux/" class="post-category" target="_blank">
-                                    linux
+                            <a href="/categories/golang/" class="post-category" target="_blank">
+                                    golang
                                 </a>
                             
                             
@@ -1135,8 +1170,8 @@ root@ceph6:~# df -k |grep /dev/sda | sed -n 1p
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/命令详解/" target="_blank">
-                        <span class="chip bg-color">命令详解</span>
+                    <a href="/tags/gomod/" target="_blank">
+                        <span class="chip bg-color">gomod</span>
                     </a>
                     
                 </div>
@@ -1154,7 +1189,7 @@ root@ceph6:~# df -k |grep /dev/sda | sed -n 1p
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="ubuntu18.04磁盘格式化被占用">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="ubuntu18.04磁盘格式化被占用">
                         
                         <span class="card-title">ubuntu18.04磁盘格式化被占用</span>
                     </div>
@@ -1375,7 +1410,7 @@ Disk /dev/sd
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
                 <span class="white-color">
-                    440.3k
+                    445.9k
                 </span>
                 
 
